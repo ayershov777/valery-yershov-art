@@ -1,0 +1,20 @@
+{
+  "name": "valery-yershov-art",
+  "version": "1.0.0",
+  "description": "Showcase of Valery Yershov's techniques, art collections, and history.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
+  },
+  "author": "Anthony Yershov",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1"
+  },
+  "engines": {
+    "node": "10.15.3"
+  }
+}
