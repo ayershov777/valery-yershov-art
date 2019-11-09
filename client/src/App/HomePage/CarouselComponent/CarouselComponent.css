@@ -1,0 +1,57 @@
+.CarouselComponent {
+  background-color: black;
+  background-color: rgba(20, 20, 20, 0.92);
+}
+
+.App-Landscape .CarouselComponent {
+  height: 82.5vh;
+}
+
+.App-Portrait .CarouselComponent {
+  height: 52.5vh;
+}
+
+div.Carousel.carousel.slide {
+  height: 100%;
+}
+
+.frame {
+  width: 100vw;
+  position: relative;
+  margin-top: 3vh;
+}
+
+.App-Desktop.App-Landscape .frame {
+  height: 72.5vh;
+}
+
+.App-Mobile.App-Landscape .frame {
+  height: 77.5vh;
+}
+
+.App-Portrait .frame {
+  height: 47.5vh;
+}
+
+
+.frame img {
+  max-height: 100%;
+  max-width: 100%;
+  width: auto;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.carousel-image {
+  animation: img-blur-in linear 1s;
+}
+
+@keyframes img-blur-in {
+  from { filter: blur(4px); }
+  to { filter: blur(0); }
+}

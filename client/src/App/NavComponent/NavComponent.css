@@ -1,0 +1,30 @@
+.Navbar {
+  background-color: black;
+  font-weight: 600;
+  box-shadow: 0 3px 5px black;
+}
+
+#basic-navbar-nav div.m-auto.navbar-nav {
+  justify-content: space-around;
+  width: 80%;
+}
+
+a.navbar-brand {
+  font-style: italic;
+  color: white;
+}
+
+
+#basic-navbar-nav div a.nav-link,
+#basic-navbar-nav div a.NavItem.nav-link,
+#basic-navbar-nav div div a.dropdown-toggle.nav-link {
+  text-align: center;
+  color: #CCC;
+}
+
+a.navbar-brand:hover,
+#basic-navbar-nav div a.nav-link:hover,
+#basic-navbar-nav div a.NavItem.nav-link:hover,
+#basic-navbar-nav div div a.dropdown-toggle.nav-link:hover {
+  color: white;
+}
