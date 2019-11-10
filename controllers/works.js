@@ -32,11 +32,11 @@ async function getWork(req, res) {
 async function createWork(req, res) {
   try {
     assert(req.body.collection_id, 'req.body.collection_id is not defined');
-    const collection = await Collection.findById(req.body.collection_id);
-    assert(collection, 'collection id not found');
-    collection.works.push(req.body.work_info);
-    await collection.save();
-    res.status(201).json({ work: collection.works[collection.works.length-1] });
+    const q = Collection.findById(req.body.collection_id);
+    q.updateOne({ "$push": { "works": req.body.work_info }});
+    const collection = await q.exec('findOne');
+    const work = collection.works[collection.works.length-1];
+    res.json({ "_id": work._id });
   } catch(err) {
     console.log(err);
     res.status(500).send(err.message || 'server error');
@@ -46,15 +46,13 @@ async function createWork(req, res) {
 async function updateWork(req, res) {
   try {
     const updateQuery = {};
-    Object.keys(req.body.work_info).forEach(key => {
-      updateQuery[`works.$.${key}`] = req.body.work_info[key];
-    });
-
+    Object.keys(req.body.work_info).forEach(key =>
+      updateQuery[`works.$.${key}`] = req.body.work_info[key]);
     const q = Collection.findOne();
     q.where({ 'works._id': req.params.id });
     q.updateOne({ '$set': updateQuery });
-    const collection = await q.exec();
-    assert(collection, 'work id not found');
+    const results = await q.exec();
+    assert(!!results.n, 'work id not found');
     res.status(204).send();
   } catch(err) {
     console.log(err);
@@ -64,16 +62,14 @@ async function updateWork(req, res) {
 
 async function deleteWork(req, res) {
   try {
-    const q = Collection.findOne();
-    q.where({ 'works._id': req.params.id });
-    q.update({ '$pull': { "works": { "_id": req.params.id }}});
-    const collection = await q.exec();
-    assert(collection, 'work id not found');
+    const q = Collection.findOne({ 'works._id': req.params.id });
+    const results = await q.updateOne({ "$pull": { "works": { "_id": req.params.id }}});
+    assert(!!results.n, 'work id not found');
     res.status(204).send();
   } catch(err) {
     console.log(err);
     if(err.message === 'work id not found')
-      res.status(300);
+      res.status(400);
     else res.status(500);
     res.send(err.message || 'server error');
   }
