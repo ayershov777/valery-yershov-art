@@ -12,6 +12,7 @@ app.use(express.static(path.join(__dirname, 'client', 'build')));
 app.use(express.json());
 app.use(logger('dev'));
 
+app.use('/api/v1/photos', require('./routes/photos'));
 app.use('/api/v1/collections', require('./routes/collections'));
 app.use('/api/v1/works', require('./routes/works'));
 

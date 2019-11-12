@@ -1,72 +1,53 @@
 const Collection = require('../models/collection');
-const assert = require('assert');
 
-async function getAllCollections(req, res) {
+async function getAllCollections(req, res, next) {
   try {
-    const collections = await Collection.find();
+    const collections = await Collection.find().lean();
     res.json({ collections });
   } catch(err) {
-    console.log(err);
-    res.status(500).send(err.message || 'server error');
+    next(err);
   }
 }
 
-async function getCollection(req, res) {
+async function getCollection(req, res, next) {
   try {
-    const collection = await Collection.findById(req.params.id);
+    const collection = await Collection.findById(req.params.id).lean();
+    if(!collection) return res.status(404).send('collection id not found');
     res.json({ collection });
   } catch(err) {
-    console.log(err);
-    res.status(500).send(err.message || 'server error');
+    next(err);
   }
 }
 
-async function createCollection(req, res) {
+async function createCollection(req, res, next) {
   try {
-    assert(req.body.collection_info, 'req.body.collection_info is not defined');
     let collection = await Collection.create(req.body.collection_info);
     res.status(201).json({ _id: collection._id });
   } catch(err) {
-    console.log(err);
-    if(err.message === 'req.body.collection_info is not defined')
-      res.status(400);
-    else res.status(500);
-    res.send(err.message || 'server error');
+    next(err);
   }
 }
 
-async function updateCollection(req, res) {
+async function updateCollection(req, res, next) {
   try {
-    assert(req.body.collection_info, 'req.body.collection_info is not defined');
-    const q = Collection.findById(req.params.id);
-    const updateQuery = {};
-    Object.keys(req.body.collection_info).forEach(key => {
-      updateQuery[key] = req.body.collection_info[key];
-    });
-    const results = await q.updateOne({ "$set": updateQuery });
-    assert(!!results.n, 'collection id not found');
+    const q = Collection.findByIdAndUpdate(req.params.id, { "$set": req.body.collection_info });
+    q.setOptions({ runValidators: true });
+    const n = await q.lean().estimatedDocumentCount();
+    if(!n) return res.status(404).send('collection id not found');
     res.status(204).send();
   } catch(err) {
-    console.log(err);
-    if(err.message === 'collection id not found')
-      res.status(400);
-    else res.status(500);
-    res.send(err.message || 'server error');
+    next(err);
   }
 }
 
 async function deleteCollection(req, res) {
   try {
-    const q = Collection.findById(req.params.id);
-    const results = await q.deleteOne();
-    assert(!!results.n, 'collection id not found');
+    const q = Collection.findByIdAndDelete(req.params.id);
+    const n = q.lean().estimatedDocumentCount();
+    if(!n) return res.status(404).send('collection id not found');
     res.status(204).send();
   } catch(err) {
-    console.log(err);
-    if(err.message === 'collection id not found')
-      res.status(400);
-    else res.state(500);
-    res.send(err.message || 'server error');
+    next(err);
   }
 }
 

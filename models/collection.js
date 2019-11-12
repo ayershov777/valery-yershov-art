@@ -5,24 +5,9 @@ const workSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  pxWidth: {
-    type: Number,
-    required: true
-  },
-  pxHeight: {
-    type: Number,
-    required: true
-  },
-  main_url: {
-    type: String,
-    required: true
-  },
-  placeholder_url: {
-    type: String,
-    required: true
-  },
-  alt: {
-    type: String,
+  photo: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Photo',
     required: true
   },
   sizeLabel: {
@@ -59,8 +44,8 @@ const collectionSchema = mongoose.Schema({
   }
 });
 
-collectionSchema.pre('updateOne', next => {
-  console.log('collection pre updateOne');
+collectionSchema.pre('findOneAndUpdate', next => {
+  console.log('collection pre findOneAndUpdate');
   next();
 });
 
