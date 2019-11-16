@@ -30,11 +30,12 @@ async function createPhoto(req, res, next) {
 
 async function updatePhoto(req, res, next) {
   try {    
-    const q = Photo.findByIdAndUpdate(req.params.id, { "$set": req.body.photo_info });
-    q.setOptions({ runValidators: true });
-    const photo = await q.lean().estimatedDocumentCount();
-
-    if(!photo) return res.status(401).send('photo id not found');
+    const photo = await Photo.findByIdAndUpdate(
+      req.params.id,
+      req.body.photo_info,
+      { runValidators: true, projection: '_id' })
+    .lean();
+    if(!photo) return res.status(404).send('photo id not found');
     res.status(204).send();
   } catch(err) {
     next(err);
@@ -43,7 +44,7 @@ async function updatePhoto(req, res, next) {
 
 async function deletePhoto(req, res, next) {
   try {
-    const photo = await Photo.findByIdAndDelete(req.params.id).lean();
+    const photo = await Photo.findByIdAndDelete(req.params.id, { projection: '_id' }).lean();
     if(!photo) return res.status(404).send('photo id not found');
     res.status(204).send();
   } catch(err) {

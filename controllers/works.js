@@ -3,17 +3,13 @@ const Collection = require('../models/collection');
 async function getAllWorks(req, res, next) {
   try {
     if(req.query.collection_id) {
-      const q = Collection.findById(req.query.collection_id, 'works');
-      q.projection({ "works": 1 });
-      q.populate('works.photo');
-      const collection = await q.lean();
+      const collection = await Collection.findById(req.query.collection_id, 'works', { projection: { _id: 0, works: 1 }})
+      .populate('works.photo')
+      .lean();
       if(!collection) return res.status(404).send('collection id not found');
       var works = collection.works;
     } else {
-      const q = Collection.find({}, 'works');
-      q.projection({ "works": 1 });
-      q.populate('works.photo');
-      const collections = await q.lean();
+      const collections = await Collection.find({}, 'works').populate('works.photo').lean();
       var works = collections.reduce((works, collection) => [...works, ...collection.works], []);
     }
     res.json({ works });
@@ -24,11 +20,10 @@ async function getAllWorks(req, res, next) {
 
 async function getWork(req, res, next) {
   try {
-    const q = Collection.findOne({ "works._id": req.params.id });
-    q.projection({ "_id": 0, "works.$": 1 });
-    q.populate('works.photo');
-    const collection = await q.lean();
-    if(!collection) return res.status(404).send("work id not found");
+    const collection = await Collection.findOne({ 'works._id': req.params.id }, { _id: 0, 'works.$': 1 })
+    .populate('works.photo')
+    .lean();
+    if(!collection) return res.status(404).send('work id not found');
     const work = collection.works[0];
     res.json({ work });
   } catch(err) {
@@ -38,13 +33,14 @@ async function getWork(req, res, next) {
 
 async function createWork(req, res, next) {
   try {
-    const q = Collection.findOneAndUpdate({ _id: req.body.collection_id }, { "$push": { "works": req.body.work_info }});
-    q.setOptions({ new: true, runValidators: true });
-    q.projection({ "_id": 0, "works._id": 1, "works": { "$slice": -1,}});
-    const collection = await q.lean();
+    const collection = await Collection.findOneAndUpdate(
+      { _id: req.body.collection_id }, 
+      { '$push': { works: req.body.work_info }},
+      { new: true, runValidators: true, projection: { _id: 0, 'works._id': 1, works: { '$slice': -1 }}})
+    .lean();
     if(!collection) return res.status(404).send('collection id not found');
     const work = collection.works[0];
-    res.json({ work });
+    res.json({ _id: work._id });
   } catch(err) {
     next(err);
   }
@@ -54,10 +50,12 @@ async function updateWork(req, res, next) {
   try {
     const updateQuery = {};
     Object.keys(req.body.work_info).forEach(key => updateQuery[`works.$.${key}`] = req.body.work_info[key]);
-    const q = Collection.findOneAndUpdate({ 'works._id': req.params.id }, { '$set': updateQuery });
-    q.setOptions({ runValidators: true });
-    const n = await q.lean().estimatedDocumentCount();
-    if(!n) return res.status(404).send('work id not found');
+    const collection = await Collection.findOneAndUpdate(
+      { 'works._id': req.params.id }, 
+      updateQuery, 
+      { runValidators: true })
+    .lean();
+    if(!collection) return res.status(404).send('work id not found');
     res.status(204).send();
   } catch(err) {
     next(err);
@@ -66,9 +64,12 @@ async function updateWork(req, res, next) {
 
 async function deleteWork(req, res, next) {
   try {
-    const q = Collection.findOneAndUpdate({ 'works._id': req.params.id }, { "$pull": { "works": { "_id": req.params.id }}});
-    const n = await q.lean().estimatedDocumentCount();
-    if(!n) return res.status(404).send('work id not found')
+    const collection = await Collection.findOneAndUpdate(
+      { 'works._id': req.params.id },
+      { '$pull': { works: { _id: req.params.id }}},
+      { projection: '_id' })
+    .lean();
+    if(!collection) return res.status(404).send('work id not found');
     res.status(204).send();
   } catch(err) {
     next(err);

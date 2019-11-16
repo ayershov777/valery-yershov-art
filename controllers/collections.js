@@ -30,10 +30,12 @@ async function createCollection(req, res, next) {
 
 async function updateCollection(req, res, next) {
   try {
-    const q = Collection.findByIdAndUpdate(req.params.id, { "$set": req.body.collection_info });
-    q.setOptions({ runValidators: true });
-    const n = await q.lean().estimatedDocumentCount();
-    if(!n) return res.status(404).send('collection id not found');
+    const collection = await Collection.findByIdAndUpdate(
+      req.params.id, 
+      req.body.collection_info, 
+      { runValidators: true, projection: '_id' })
+    .lean();
+    if(!collection) return res.status(404).send('collection id not found');
     res.status(204).send();
   } catch(err) {
     next(err);
@@ -42,9 +44,8 @@ async function updateCollection(req, res, next) {
 
 async function deleteCollection(req, res) {
   try {
-    const q = Collection.findByIdAndDelete(req.params.id);
-    const n = q.lean().estimatedDocumentCount();
-    if(!n) return res.status(404).send('collection id not found');
+    const collection = await Collection.findByIdAndDelete(req.params.id, { projection: '_id' }).lean();
+    if(!collection) return res.status(404).send('collection id not found');
     res.status(204).send();
   } catch(err) {
     next(err);

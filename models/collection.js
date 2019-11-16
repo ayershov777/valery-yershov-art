@@ -10,6 +10,7 @@ const workSchema = mongoose.Schema({
     ref: 'Photo',
     required: true
   },
+  videoUrl: String,
   sizeLabel: {
     type: String,
     default: "unavailable"
@@ -41,6 +42,10 @@ const collectionSchema = mongoose.Schema({
   coverIndex: {
     type: Number,
     default: 0
+  },
+  public: {
+    type: Boolean,
+    default: false
   }
 });
 
