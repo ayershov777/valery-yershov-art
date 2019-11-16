@@ -53,7 +53,7 @@ async function updateWork(req, res, next) {
     const collection = await Collection.findOneAndUpdate(
       { 'works._id': req.params.id }, 
       updateQuery, 
-      { runValidators: true })
+      { runValidators: true, projection: '_id' })
     .lean();
     if(!collection) return res.status(404).send('work id not found');
     res.status(204).send();
