@@ -15,6 +15,7 @@ app.use(logger('dev'));
 app.use('/api/v1/photos', require('./routes/photos'));
 app.use('/api/v1/collections', require('./routes/collections'));
 app.use('/api/v1/works', require('./routes/works'));
+app.use('/api/v1/exhibitions', require('./routes/exhibitions'));
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
