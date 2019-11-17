@@ -12,11 +12,15 @@
   "author": "Anthony Yershov",
   "license": "ISC",
   "dependencies": {
+    "aws-sdk": "^2.573.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "mongoose": "^5.7.7",
     "morgan": "^1.9.1",
-    "node-sass": "^4.13.0"
+    "multer": "^1.4.2",
+    "multer-s3": "^2.9.0",
+    "node-sass": "^4.13.0",
+    "sharp": "^0.23.2"
   },
   "engines": {
     "node": "10.15.3"

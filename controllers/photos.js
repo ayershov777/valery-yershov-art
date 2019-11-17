@@ -1,4 +1,31 @@
 const Photo = require('../models/photo');
+const fs = require('fs');
+const path = require('path');
+const aws = require('aws-sdk');
+const sharp = require('sharp');
+
+// config
+
+aws.config.setPromisesDependency();
+aws.config.update({
+  accessKeyId: process.env.S3_ACCESS_KEY,
+  secretAccessKey: process.env.S3_SECRET_KEY,
+  region: 'us-east-1'
+});
+
+const s3 = new aws.S3();
+const BUCKET_NAME = 'valery-yershov-art';
+
+function s3Upload (params) {
+  return new Promise((resolve, reject) => {
+    s3.upload(
+      { ...params, Bucket: BUCKET_NAME, ACL: 'public-read' },
+      (err, data) => (err) ? reject(err) : resolve(data)
+    );
+  });
+}
+
+// controller functions
 
 async function getAllPhotos(req, res, next) {
   try {
@@ -21,8 +48,42 @@ async function getPhoto(req, res, next) {
 
 async function createPhoto(req, res, next) {
   try {
-    const photo = await Photo.create(req.body.photo_info);
-    res.status(201).send({ _id: photo._id });
+    const file = req.file;
+    const key = path.basename(file.originalname, path.extname(file.originalname)) + '-' + Date.now() + path.extname(file.originalname);
+
+    // upload main img to s3
+    const mainData = await s3Upload({ Key: key, Body: fs.readFileSync(file.path) });
+
+    // generate blurred image with sharp
+    const blur = await sharp(file.path).blur(20).toFile('tmp/blur.jpg');
+    
+    // upload blur img to s3
+    const blurData = await s3Upload({
+      Key: key.slice(0, key.length-4) + '_blur.jpg',
+      Body: fs.readFileSync('tmp/blur.jpg')}
+    );
+
+    // save data to MongoDB
+    const photo = await Photo.create({
+      main_url: mainData.Location,
+      blur_url: blurData.Location,
+      alt: req.body.alt,
+      pxHeight: blur.height,
+      pxWidth: blur.width
+    });
+    
+    res.status(201).send({
+      _id: photo._id,
+      main_url: photo.main_url,
+      blur_url: photo.blur_url
+    });
+  } catch(err) {
+    next(err);
+  }
+
+  try {
+    fs.unlinkSync('tmp/blur.jpg');
+    fs.unlinkSync(req.file.path);
   } catch(err) {
     next(err);
   }
