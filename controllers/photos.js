@@ -4,7 +4,7 @@ const path = require('path');
 const aws = require('aws-sdk');
 const sharp = require('sharp');
 
-// config
+// S3 config
 
 aws.config.setPromisesDependency();
 aws.config.update({
@@ -16,13 +16,47 @@ aws.config.update({
 const s3 = new aws.S3();
 const BUCKET_NAME = 'valery-yershov-art';
 
-function s3Upload (params) {
+function s3Upload(params) {
   return new Promise((resolve, reject) => {
     s3.upload(
       { ...params, Bucket: BUCKET_NAME, ACL: 'public-read' },
       (err, data) => (err) ? reject(err) : resolve(data)
     );
   });
+}
+
+function s3Delete(params) {
+  return new Promise((resolve, reject) => {
+    s3.deleteObject(
+      { ...params, Bucket: BUCKET_NAME },
+      (err, data) => (err) ? reject(err) : resolve(data)
+    );
+  });
+}
+
+// generate blur and upload photos to s3
+async function handlePhotos(file, photo_info) {
+  try {
+    const blur = await sharp(file.path).blur(20).toFile('tmp/blur.jpg');
+    
+    const mainKey = path.basename(file.originalname, path.extname(file.originalname)) + '-' + Date.now() + path.extname(file.originalname);
+    const mainData = await s3Upload({ Key: mainKey, Body: fs.readFileSync(file.path) });
+    
+    const blurKey = mainKey.slice(0, mainKey.length-4) + '_blur.jpg';
+    const blurData = await s3Upload({ Key: blurKey, Body: fs.readFileSync('tmp/blur.jpg') });
+    
+    return {
+      ...photo_info,
+      mainUrl: mainData.Location,
+      blurUrl: blurData.Location,
+      mainKey,
+      blurKey,
+      pxHeight: blur.height,
+      pxWidth: blur.width
+    };
+  } catch(err) {
+    throw err;
+  }
 }
 
 // controller functions
@@ -48,56 +82,35 @@ async function getPhoto(req, res, next) {
 
 async function createPhoto(req, res, next) {
   try {
-    const file = req.file;
-    const key = path.basename(file.originalname, path.extname(file.originalname)) + '-' + Date.now() + path.extname(file.originalname);
-
-    // upload main img to s3
-    const mainData = await s3Upload({ Key: key, Body: fs.readFileSync(file.path) });
-
-    // generate blurred image with sharp
-    const blur = await sharp(file.path).blur(20).toFile('tmp/blur.jpg');
-    
-    // upload blur img to s3
-    const blurData = await s3Upload({
-      Key: key.slice(0, key.length-4) + '_blur.jpg',
-      Body: fs.readFileSync('tmp/blur.jpg')}
-    );
-
-    // save data to MongoDB
-    const photo = await Photo.create({
-      main_url: mainData.Location,
-      blur_url: blurData.Location,
-      alt: req.body.alt,
-      pxHeight: blur.height,
-      pxWidth: blur.width
-    });
-    
-    res.status(201).send({
-      _id: photo._id,
-      main_url: photo.main_url,
-      blur_url: photo.blur_url
-    });
-  } catch(err) {
-    next(err);
-  }
-
-  try {
-    fs.unlinkSync('tmp/blur.jpg');
-    fs.unlinkSync(req.file.path);
+    const photo_info = await handlePhotos(req.file, { alt: req.body.alt });
+    req.photo = await Photo.create(photo_info);
+    next();
   } catch(err) {
     next(err);
   }
 }
 
 async function updatePhoto(req, res, next) {
-  try {    
-    const photo = await Photo.findByIdAndUpdate(
+  try {
+    let photo_info = {};
+    if(req.body.alt)
+      photo_info.alt = req.body.alt;
+    
+    if(req.file)
+      photo_info = await handlePhotos(req.file, photo_info);
+      
+    req.photo = await Photo.findByIdAndUpdate(
       req.params.id,
-      req.body.photo_info,
-      { runValidators: true, projection: '_id' })
-    .lean();
-    if(!photo) return res.status(404).send('photo id not found');
-    res.status(204).send();
+      photo_info,
+      { runValidators: true, projection: 'mainKey blurKey' })
+     .lean();
+    if(!req.photo) return res.status(404).send('photo id not found');
+
+    await s3Delete({ Key: req.photo.mainKey }); 
+    await s3Delete({ Key: req.photo.blurKey }); 
+
+    if(req.file) next();
+    else res.status(204).send();
   } catch(err) {
     next(err);
   }
@@ -105,8 +118,10 @@ async function updatePhoto(req, res, next) {
 
 async function deletePhoto(req, res, next) {
   try {
-    const photo = await Photo.findByIdAndDelete(req.params.id, { projection: '_id' }).lean();
+    const photo = await Photo.findByIdAndDelete(req.params.id, { projection: 'mainKey blurKey' }).lean();
     if(!photo) return res.status(404).send('photo id not found');
+    await s3Delete({ Key: photo.mainKey }); 
+    await s3Delete({ Key: photo.blurKey }); 
     res.status(204).send();
   } catch(err) {
     next(err);

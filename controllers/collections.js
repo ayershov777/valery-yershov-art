@@ -34,7 +34,7 @@ async function updateCollection(req, res, next) {
       req.params.id, 
       req.body.collection_info, 
       { runValidators: true, projection: '_id' })
-    .lean();
+     .lean();
     if(!collection) return res.status(404).send('collection id not found');
     res.status(204).send();
   } catch(err) {

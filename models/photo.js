@@ -1,11 +1,19 @@
 const mongoose = require('mongoose');
 
 const photoSchema = mongoose.Schema({
-  main_url: {
+  mainUrl: {
     type: String,
     required: true
   },
-  blur_url: {
+  blurUrl: {
+    type: String,
+    required: true
+  },
+  mainKey: {
+    type: String,
+    required: true
+  },
+  blurKey: {
     type: String,
     required: true
   },

@@ -34,7 +34,7 @@ async function updateExhibition(req, res, next) {
       req.params.id,
       req.body.exhibition_info,
       { projection: '_id' })
-    .lean();
+     .lean();
     if(!exhibition) return res.status(404).send('exhibition id not found');
     res.status(204).send();
   } catch(err) {
@@ -48,7 +48,7 @@ async function deleteExhibition(req, res, next) {
       req.params.id,
       req.body.exhibition_info,
       { projection: '_id' })
-    .lean();
+     .lean();
     if(!exhibition) return res.status(404).send('exhibition id not found');
     res.status(204).send();
   } catch(err) {

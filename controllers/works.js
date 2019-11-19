@@ -4,8 +4,8 @@ async function getAllWorks(req, res, next) {
   try {
     if(req.query.collection_id) {
       const collection = await Collection.findById(req.query.collection_id, 'works', { projection: { _id: 0, works: 1 }})
-      .populate('works.photo')
-      .lean();
+       .populate('works.photo')
+       .lean();
       if(!collection) return res.status(404).send('collection id not found');
       var works = collection.works;
     } else {
@@ -21,8 +21,8 @@ async function getAllWorks(req, res, next) {
 async function getWork(req, res, next) {
   try {
     const collection = await Collection.findOne({ 'works._id': req.params.id }, { _id: 0, 'works.$': 1 })
-    .populate('works.photo')
-    .lean();
+     .populate('works.photo')
+     .lean();
     if(!collection) return res.status(404).send('work id not found');
     const work = collection.works[0];
     res.json({ work });
@@ -37,7 +37,7 @@ async function createWork(req, res, next) {
       { _id: req.body.collection_id }, 
       { '$push': { works: req.body.work_info }},
       { new: true, runValidators: true, projection: { _id: 0, 'works._id': 1, works: { '$slice': -1 }}})
-    .lean();
+     .lean();
     if(!collection) return res.status(404).send('collection id not found');
     const work = collection.works[0];
     res.json({ _id: work._id });
@@ -54,7 +54,7 @@ async function updateWork(req, res, next) {
       { 'works._id': req.params.id }, 
       updateQuery, 
       { runValidators: true, projection: '_id' })
-    .lean();
+     .lean();
     if(!collection) return res.status(404).send('work id not found');
     res.status(204).send();
   } catch(err) {
@@ -68,7 +68,7 @@ async function deleteWork(req, res, next) {
       { 'works._id': req.params.id },
       { '$pull': { works: { _id: req.params.id }}},
       { projection: '_id' })
-    .lean();
+     .lean();
     if(!collection) return res.status(404).send('work id not found');
     res.status(204).send();
   } catch(err) {
