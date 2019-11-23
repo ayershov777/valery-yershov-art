@@ -1,6 +1,5 @@
 const Exhibition = require('../models/exhibition');
 
-
 async function getAllExhibitions(req, res, next) {
   try {
     const exhibitions = await Exhibition.find().lean();

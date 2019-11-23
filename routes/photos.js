@@ -3,15 +3,15 @@ const photosCtrl = require('../controllers/photos');
 const multer = require('multer');
 const fs = require('fs');
 
-const formData = multer({ dest: 'tmp/' }).single('image');
+const parseImage = multer({ dest: 'tmp/' }).single('image');
 
 router.get('/', photosCtrl.index);
 router.get('/:id', photosCtrl.show);
-router.post('/', formData, photosCtrl.create, cleanTemp);
-router.put('/:id', formData, photosCtrl.update, cleanTemp);
+router.post('/', parseImage, photosCtrl.create, cleanTemp);
+router.put('/:id', parseImage, photosCtrl.update, cleanTemp);
 router.delete('/:id', photosCtrl.delete);
 
-// delete the image files created by multer
+// deletes the image files created by multer
 function cleanTemp(req, res, next) {
   try {
     fs.unlinkSync('tmp/blur.jpg');
