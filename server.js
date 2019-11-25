@@ -5,6 +5,7 @@ const logger = require('morgan');
 
 require('dotenv').config();
 require('./config/database');
+require('./config/aws');
 
 const app = express();
 app.set('port', process.env.PORT || 3001);
@@ -25,6 +26,8 @@ app.use('/api/v1/collections', require('./routes/collections'));
 app.use('/api/v1/works', require('./routes/works'));
 app.use('/api/v1/exhibitions', require('./routes/exhibitions'));
 app.use('/api/v1/pages', require('./routes/pages'));
+    
+    app.use('/api/v1/videos', require('./routes/videos'));
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));

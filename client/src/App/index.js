@@ -6,6 +6,10 @@ import {
 } from 'react-router-dom';
 
 import HomePage from './HomePage';
+import CollectionPage from './CollectionPage';
+import HistoryPage from './HistoryPage';
+import TechniquePage from './TechniquePage';
+import ContactPage from './ContactPage';
 import NavComponent from './NavComponent';
 
 import useWindowSize from '../hooks/windowSize';
@@ -22,6 +26,10 @@ function App() {
         <NavComponent />
         <Switch>
           <Route exact path="/" component={HomePage} />
+          <Route exact path="/collections" component={CollectionPage} />
+          <Route exact path="/technique" component={TechniquePage} />
+          <Route exact path="/history" component={HistoryPage} />
+          <Route exact path="/contact" component={ContactPage} />
         </Switch>
       </Router>
     </div>

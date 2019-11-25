@@ -1,25 +1,13 @@
 const Photo = require('../models/photo');
 const fs = require('fs');
 const path = require('path');
-const aws = require('aws-sdk');
 const sharp = require('sharp');
-
-// S3 config
-
-aws.config.setPromisesDependency();
-aws.config.update({
-  accessKeyId: process.env.S3_ACCESS_KEY,
-  secretAccessKey: process.env.S3_SECRET_KEY,
-  region: 'us-east-1'
-});
-
-const s3 = new aws.S3();
-const BUCKET_NAME = 'valery-yershov-art';
+const s3 = new (require('aws-sdk')).S3();
 
 function s3Upload(params) {
   return new Promise((resolve, reject) => {
     s3.upload(
-      { ...params, Bucket: BUCKET_NAME, ACL: 'public-read' },
+      { ...params, Bucket: process.env.BUCKET_NAME, ACL: 'public-read' },
       (err, data) => (err) ? reject(err) : resolve(data)
     );
   });
@@ -28,7 +16,7 @@ function s3Upload(params) {
 function s3Delete(params) {
   return new Promise((resolve, reject) => {
     s3.deleteObject(
-      { ...params, Bucket: BUCKET_NAME },
+      { ...params, Bucket: process.env.BUCKET_NAME },
       (err, data) => (err) ? reject(err) : resolve(data)
     );
   });
@@ -83,7 +71,10 @@ async function getPhoto(req, res, next) {
 async function createPhoto(req, res, next) {
   try {
     const photo_info = await handlePhotos(req.file, { alt: req.body.alt });
-    req.photo = await Photo.create(photo_info);
+    const photo = await Photo.create(photo_info);
+    req.nextCb = () => {
+      res.status(201).send({ _id: photo.id });
+    }
     next();
   } catch(err) {
     next(err);
@@ -99,18 +90,24 @@ async function updatePhoto(req, res, next) {
     if(req.file)
       photo_info = await handlePhotos(req.file, photo_info);
       
-    req.photo = await Photo.findByIdAndUpdate(
+    const photo = await Photo.findByIdAndUpdate(
       req.params.id,
       photo_info,
       { runValidators: true, projection: 'mainKey blurKey' })
      .lean();
-    if(!req.photo) return res.status(404).send('photo id not found');
+    if(!photo) return res.status(404).send('photo id not found');
 
-    await s3Delete({ Key: req.photo.mainKey }); 
-    await s3Delete({ Key: req.photo.blurKey }); 
+    await s3Delete({ Key: photo.mainKey }); 
+    await s3Delete({ Key: photo.blurKey });
 
-    if(req.file) next();
-    else res.status(204).send();
+    if(req.file) {
+      req.nextCb = () => { 
+        res.status(204).send();
+      }
+      next();
+    } else {
+      res.status(204).send();
+    }
   } catch(err) {
     next(err);
   }
