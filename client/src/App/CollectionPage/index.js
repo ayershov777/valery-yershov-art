@@ -1,9 +1,12 @@
-import React from 'react'
+import React from 'react';
+import { useParams } from 'react-router-dom'
 
 export default function CollectionPage() {
+  let { title } = useParams();
+
   return (
     <div>
-      CollectionPage
+      Collection Title: {title}
     </div>
   );
 }

@@ -2,7 +2,8 @@ const Collection = require('../models/collection');
 
 async function getAllCollections(req, res, next) {
   try {
-    const collections = await Collection.find().lean();
+    const conditions = req.query.show_hidden === "true" ? {} : { public: true };
+    const collections = await Collection.find(conditions).lean();
     res.json({ collections });
   } catch(err) {
     next(err);

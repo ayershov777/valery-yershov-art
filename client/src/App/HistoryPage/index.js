@@ -1,9 +1,9 @@
-import React from 'react'
+import React from 'react';
 
-export default function HistoryPage() {
+export default function HistoryPage(props) {
   return (
     <div>
-      HistoryPage
+      <p>{props.data.texts.short}</p>
     </div>
   );
 }

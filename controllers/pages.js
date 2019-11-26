@@ -87,6 +87,8 @@ async function deletePagePhoto(req, res, next) {
 
 async function addPageText(req, res, next) {
   try {
+    if(!req.body.page_text_info)
+      return res.status(400).send('missing page_text_info');
     const page = await Page.findOneAndUpdate(
       { title: req.params.title },
       { '$push': { texts: req.body.page_text_info }},
