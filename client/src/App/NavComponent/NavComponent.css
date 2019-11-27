@@ -2,6 +2,7 @@
   background-color: black;
   font-weight: 600;
   box-shadow: 0 3px 5px black;
+  z-index: 1000000;
 }
 
 #basic-navbar-nav div.m-auto.navbar-nav {

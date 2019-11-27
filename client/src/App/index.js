@@ -15,15 +15,15 @@ import NavComponent from './NavComponent';
 
 import useWindowSize from '../hooks/windowSize';
 
-import './App.css';
-
 function App() {
   const mq = window.matchMedia("(min-device-width: 1367px)");
   const [width, height] = useWindowSize();
 
-  const [pageData, setPageData] = useState({});
-  const [collections, setCollections] = useState([]);
-  const [exhibitions, setExhibitions] = useState([]);
+  const [backgroundLoading, setBackgroundLoading] = useState(true);
+
+  const [pageData, setPageData] = useState(null);
+  const [collections, setCollections] = useState(null);
+  const [exhibitions, setExhibitions] = useState(null);
 
   useEffect(() => {
     async function fetchData(url) {
@@ -31,7 +31,7 @@ function App() {
       return await response.json();
     }
 
-    // NOTE-TO-SELF:  move this logic to the back-end
+    // NOTE-TO-SELF:  move this cleanup to the back-end
     function dataArrayToObject(a, cb) {
       let o = {}
       a.forEach(e => {
@@ -39,7 +39,7 @@ function App() {
         delete e.__v;
         o[e.title] = e;
         cb && cb(o, e); // cb can include additional reformatting operations
-        delete o[e.title].title;
+        // delete o[e.title].title;
       });
       return o;
     }
@@ -64,37 +64,58 @@ function App() {
         }
 
         if(e.photos) {
-          const photos = dataArrayToObject(e.photos, (o, e) => o[e.title] = e.photo);
+          const photos = dataArrayToObject(e.photos, (o, e) => { 
+            delete e.photo._id;
+            delete e.photo.__v;
+            delete e.photo.mainKey;
+            delete e.photo.blurKey;
+            e.photo.title = e.title;
+            o[e.title] = e.photo
+          });
           o[e.title].photos = photos;
         }
       });
       setPageData(pages);
      });
   }, []);
+
+  var img = new Image();
+  img.onload = () => setBackgroundLoading(false);
+  img.src = 'https://valery-yershov-art.s3.amazonaws.com/background.jpg';
   
   return (
-    <div className={`App${mq.matches ? " App-Desktop" : " App-Mobile"}${width < height ? " App-Portrait" : " App-Landscape"}`}>
+    <div
+      className={`App${mq.matches ? " App-Desktop" : " App-Mobile"}${width < height ? " App-Portrait" : " App-Landscape"}`}
+      style={{
+        position: 'absolute',
+        top: 0,
+        zIndex: -1000,
+        minHeight: '100vh',
+        minWidth: '100vw',
+        ...( backgroundLoading ? {} : { backgroundImage: 'url(https://valery-yershov-art.s3.amazonaws.com/background.jpg)' })
+      }}
+    >
       <Router>
         <NavComponent />
         <Switch>
           <Route exact path="/"> 
-            <HomePage data={pageData.front} />
+            {pageData && <HomePage data={pageData.front} />}
           </Route>
 
           <Route exact path="/collections/:title">
-            <CollectionPage collections={collections} />
+            {collections && <CollectionPage collections={collections} />}
           </Route>
           
           <Route exact path="/technique">
-            <TechniquePage data={pageData.technique} />
+            {pageData && <TechniquePage data={pageData.technique} />}
           </Route>
 
           <Route exact path="/history">
-            <HistoryPage data={pageData.history} exhibitions={exhibitions} />
+            {pageData && exhibitions && <HistoryPage data={pageData.history} exhibitions={exhibitions} />}
           </Route>
 
           <Route exact path="/prior_works">
-            <PriorWorksPage data={pageData.priorWork} priorWorks={collections['prior']} />
+            {pageData && collections && <PriorWorksPage data={pageData.priorWork} priorWorks={collections['prior']} />}
           </Route>
 
           <Route exact path="/contact">
