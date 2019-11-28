@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
 
-import useWindowSize from '../../hooks/windowSize';
-
-
 import './ImageComponent.css';
 
 /*
@@ -17,9 +14,6 @@ import './ImageComponent.css';
 export default function ImageComponent(props) {
   const [loading, setLoading] = useState(true);
   const [phLoading, setPhLoading] = useState(true);
-
-  // const [width, height] = useWindowSize();
-  // console.log(width);
 
   const ar = props.photo.pxWidth / props.photo.pxHeight;
   const scale = ((sizeString) => {
@@ -38,6 +32,8 @@ export default function ImageComponent(props) {
 
   const actualWidth = props.photo.pxWidth * scale;
   const actualHeight = props.photo.pxHeight * scale;
+
+  props.setImageHeight(actualHeight);
 
   var img = new Image();
   img.onload = () => setPhLoading(false);
