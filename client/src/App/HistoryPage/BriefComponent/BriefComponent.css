@@ -1,7 +1,7 @@
 .BriefComponent p {
   text-align: center;
   font-weight: 400;
-  background-color: rgba(32, 32, 32, 0.9);
+  background-color: rgba(16, 16, 16, 0.9);
   color: white;
   padding: 2vw;
   width: 55vw;
@@ -17,7 +17,6 @@
 .BriefComponent.Large p {
   font-size: 16pt;
   width: 50vw;
-  /* margin: 10% 0 0 5%; */
 }
 
 .BriefComponent:not(.Mobile):not(.Large) p {

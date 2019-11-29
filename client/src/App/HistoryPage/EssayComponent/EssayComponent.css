@@ -1,0 +1,12 @@
+.EssayComponent {
+  background-color: rgba(32, 32, 32, 0.9);
+  color: white;
+}
+
+.EssayComponent .bio-paragraph {
+  padding: 4vh 5vw;
+  text-align: justify;
+  font-size: 14pt;
+  overflow-y: scroll;
+  height: 80vh;
+}

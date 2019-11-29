@@ -15,6 +15,8 @@ import NavComponent from './NavComponent';
 
 import useWindowSize from '../hooks/windowSize';
 
+import './App.css';
+
 function App() {
   const mq = window.matchMedia("(min-device-width: 1367px)");
   const [width, height] = useWindowSize();

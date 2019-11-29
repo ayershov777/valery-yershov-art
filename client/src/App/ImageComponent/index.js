@@ -33,7 +33,8 @@ export default function ImageComponent(props) {
   const actualWidth = props.photo.pxWidth * scale;
   const actualHeight = props.photo.pxHeight * scale;
 
-  props.setImageHeight(actualHeight);
+  if(props.setImageHeight)
+    props.setImageHeight(actualHeight);
 
   var img = new Image();
   img.onload = () => setPhLoading(false);
