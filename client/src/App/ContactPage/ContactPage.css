@@ -1,0 +1,29 @@
+.ContactPage {
+  padding: 5vh 20vw;
+}
+
+@media screen and (max-width: 500px) {
+  .ContactPage {
+    padding: 5vh 4vw;
+  }
+}
+
+.ContactPage h2 {
+  text-align: center;
+}
+
+.ContactPage td {
+  display: block;
+}
+
+.ContactPage input:not(#submit),
+.ContactPage textarea {
+  display: block;
+  width: 100%;
+}
+
+.ContactPage #submit {
+  width: 25%;
+  min-width: 120px;
+  margin: 2vh;
+}

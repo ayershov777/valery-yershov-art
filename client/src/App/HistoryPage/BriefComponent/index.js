@@ -1,49 +1,55 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 import ImageComponent from '../../ImageComponent';
-import useWindowSize from '../../../hooks/windowSize';
 
 import './BriefComponent.css';
 
-export default function BriefComponent(props) {
-  const [width, height] = useWindowSize();
+export default function BriefComponent({ photo, text }) {
+  const screenSmall = window.matchMedia("(max-width: 500px)").matches;
+  const screenMedium = !screenSmall && window.matchMedia("(max-width: 1024px)").matches;
+  const screenLarge = !screenSmall && !screenMedium;
+
   const [imageHeight, setImageHeight] = useState(0);
   const [pHeight, setPHeight] = useState(0);
-  const ref = useRef(null);
-  
-  const mobileView = (width < (height/1.75));
-  const largeView = (width > 823);
-  
-  useEffect(() => setPHeight(ref.current.clientHeight));
+  const pRef = useRef(null);
 
-  console.log(pHeight);
-
-
-  var style = {};
-  if(mobileView) style.height = imageHeight + pHeight;//props.setComponentHeight(imageHeight + pHeight);
-  else if(largeView) style.height = imageHeight; //props.setComponentHeight(imageHeight);
-  else style.height = Math.max(pHeight+(height*.415), imageHeight) //props.setComponentHeight(Math.max(pHeight+(height*.415), imageHeight));
+  useEffect(() => setPHeight(pRef.current.clientHeight));
 
   return (
-    <div 
-      className={`BriefComponent${ mobileView ? ' Mobile' : '' }${ largeView ? ' Large' : '' }`}
-      style={style}
-    >
-      <ImageComponent
-        setImageHeight={setImageHeight}
+    <div className="BriefComponent">
+      <ImageComponent setImageHeight={setImageHeight} photo={photo} style={{ 'width': '100vw' }} />
+      <p
+        ref={pRef}
         style={{
-          width: '100vw',
-          ...(mobileView)
-            ? {}
-            : {
-                position: 'absolute',
-                top: 56,
-                zIndex: -1
+          ...(screenSmall
+          ? {
+              fontSize: '12pt',
+              marginTop: '-6px',
+            }
+          : {}),
+          ...(screenMedium
+            ? {
+                fontSize: '14pt',
+                position: 'relative',
+                top: -(imageHeight/2),
+                marginBottom: -Math.min(imageHeight/2, pHeight)
               }
+            : {}),
+          ...(screenLarge
+            ? {
+                fontSize: '16pt',
+                position: 'relative',
+                top: -(imageHeight/1.05),
+                left: '3vw',
+                width: '50%',
+                marginBottom: -pHeight,
+                background: 'rgba(16, 16, 16, 0.8)'
+              }
+            : {})
         }}
-        photo={props.photo}
-      />
-      <p ref={ref}>{props.text}</p>
+      >
+        {text}
+      </p>
     </div>
   );
 }
