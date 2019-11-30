@@ -26,6 +26,7 @@ app.use('/api/v1/collections', require('./routes/collections'));
 app.use('/api/v1/works', require('./routes/works'));
 app.use('/api/v1/exhibitions', require('./routes/exhibitions'));
 app.use('/api/v1/pages', require('./routes/pages'));
+app.use('/api/v1/email', require('./routes/email'))
     
     app.use('/api/v1/videos', require('./routes/videos'));
 
