@@ -104,8 +104,8 @@ function App() {
             {pageData && <HomePage data={pageData.front} />}
           </Route>
 
-          <Route exact path="/collections/:title">
-            {collections && <CollectionPage collections={collections} />}
+          <Route exact path="/collections/:title/:chicken">
+            <CollectionPage />
           </Route>
           
           <Route exact path="/technique">

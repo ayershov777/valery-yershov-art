@@ -15,10 +15,9 @@ export default function EssayComponent({ texts }) {
     <div className="EssayComponent">
       <div className="bio-paragraph">{texts[textIdx]}</div>
 
-      <div style={{ display: 'flex', justifyContent: 'center', padding: '4px' }}>
+      <div className="flex-center">
         <Button variant="outline-primary" size="sm" onClick={handleAdvanceText}>read next paragraph</Button>
       </div>
-      
     </div>
   );
 }

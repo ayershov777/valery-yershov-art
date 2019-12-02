@@ -49,7 +49,7 @@ export default function ImageComponent(props) {
         backgroundColor: 'gray',
         maxWidth: '100%',
         ...( loading? { width: actualWidth, height: actualHeight } : {}),
-        ...( phLoading ? {} : { backgroundImage: `url(${props.photo.blurUrl})`, backgroundSize: 'cover' })
+        ...( phLoading ? {} : { backgroundImage: `url(${props.photo.blurUrl})`, backgroundSize: 'cover' }),
       }}
     >
       <img
