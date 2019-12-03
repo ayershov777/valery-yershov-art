@@ -1,6 +1,6 @@
 .CollectionPage {
   background-color: rgba(0, 0, 0, 0.85);
-  background: linear-gradient(rgba(0, 0, 0, 0.775), rgba(0, 0, 0, 0.95));
+  background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.8225) 25%, rgba(0, 0, 0, 0.8225) 75%, rgba(0, 0, 0, 0.95));
   margin: 2vw 3vw;
   box-shadow: 0 0 10px black;
   padding: 2vw 5vw 1vw 5vw;
@@ -13,4 +13,33 @@
   font-size: 3vw;
   text-shadow: 0px 0px 3px white;
   margin-bottom: 2vw;
+}
+
+div.fade.modal.show {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+div.modal-content {
+  background-color: black;
+  color: white;
+  text-shadow: 0 0 3px white;
+}
+
+div.modal-header button.close span {
+  color: white;
+}
+
+div.modal-body {
+  background-color: darkslategray;
+  text-shadow: none;
+}
+
+div.modal-body video {
+  width: 100%;
+}
+
+@media only screen and (max-width: 640px) {
+  .CollectionPage > div > h3 {
+    font-size: 9vw;
+  }
 }

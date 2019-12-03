@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Form from 'react-bootstrap/Form'
+import Form from 'react-bootstrap/Form';
 
 import './ContactPage.css';
 
@@ -9,7 +9,7 @@ export default function ContactPage() {
   const [contactInfo, setContactInfo] = useState('');
 
   const onSubmit = e => {
-    // e.preventDefault();
+    e.preventDefault();
     fetch('/api/v1/email', {
       method: 'POST',
       headers: {
@@ -27,7 +27,7 @@ export default function ContactPage() {
 
   return (
     <div className="ContactPage">
-      <h2>Send Valery an Email</h2>
+      <h2>Studio Contact</h2>
       <Form onSubmit={onSubmit}>
         <Form.Group>
           <label>Subject:</label>
@@ -42,9 +42,8 @@ export default function ContactPage() {
           <Form.Control as='textarea' value={contactInfo} onChange={e => setContactInfo(e.target.value)} required />
         </Form.Group>
         <div className="flex-center">
-        <input id="submit" type="submit" value="send" className="btn btn-success btn-lg"/>
+          <input id="submit" type="submit" value="send" className="btn btn-outline-primary btn-lg"/>
         </div>
-
       </Form>
     </div>
   );

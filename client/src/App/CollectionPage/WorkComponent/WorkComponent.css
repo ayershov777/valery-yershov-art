@@ -8,6 +8,11 @@
   box-shadow: 0 0 5px white;
 }
 
+.WorkComponent .WorkImage:hover {
+  box-shadow: 0 0 5px white;
+  cursor: pointer;
+}
+
 .WorkComponent .Description {
   display: inline-block;
   width: 50vw;
@@ -24,7 +29,7 @@
   flex-direction: column;
   justify-content: space-between;
   height: auto;
-  min-height: 60%;
+  min-height: 45vh;
   padding: 2vw;
   border: 1px solid rgb(64, 64, 64);
   border-radius: 8px;

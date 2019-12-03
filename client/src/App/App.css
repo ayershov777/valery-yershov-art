@@ -1,3 +1,7 @@
+.App {
+  font-family: 'Abel', sans-serif;
+}
+
 .flex-center {
   display: flex;
   justify-content: center;

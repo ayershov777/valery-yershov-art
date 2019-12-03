@@ -23,6 +23,7 @@ export default function CoverComponent({ collection, title, idx }) {
     <div className="Description">
       <h3>“{title}”</h3>
       <p>{collection.description}</p>
+      {/* <span /> */}
     </div>
   );
 

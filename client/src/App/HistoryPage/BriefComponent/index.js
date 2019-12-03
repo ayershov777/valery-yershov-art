@@ -17,7 +17,11 @@ export default function BriefComponent({ photo, text }) {
 
   return (
     <div className="BriefComponent">
-      <ImageComponent setImageHeight={setImageHeight} photo={photo} style={{ 'width': '100vw' }} />
+      <ImageComponent
+        setImageHeight={setImageHeight}
+        photo={photo}
+        style={{ 'width': '100vw' }}
+      />
       <p
         ref={pRef}
         style={{

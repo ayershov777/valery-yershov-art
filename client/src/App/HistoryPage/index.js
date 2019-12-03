@@ -1,13 +1,18 @@
 import React from 'react';
 
 import BriefComponent from './BriefComponent';
-import EssayComponent from './EssayComponent';
+
+import exhibitionHistoryPDF from './exhibition-history.pdf';
+import biographyPDF from './biography.pdf';
 
 export default function HistoryPage({ data }) {
   return (
     <div>
       <BriefComponent photo={data.photos.artist_portrait} text={data.texts.short} />
-      <EssayComponent texts={[ data.texts.bio_1, data.texts.bio_2, data.texts.bio_3, data.texts.bio_footer ]} />
+
+      <a href={exhibitionHistoryPDF}>Exhibition History</a> <br />
+      <a href={biographyPDF}>Biography</a>
+
     </div>
   );
 }

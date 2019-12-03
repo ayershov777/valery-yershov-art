@@ -5,6 +5,8 @@ import {
   Route
 } from 'react-router-dom';
 
+
+import ScrollToTop from './ScrollToTop';
 import HomePage from './HomePage';
 import CollectionsPage from './CollectionsPage';
 import CollectionPage from './CollectionPage';
@@ -94,11 +96,12 @@ function App() {
         top: 0,
         zIndex: -1000,
         minHeight: '100vh',
-        width: '100vw',
+        width: '100%',
         ...( backgroundLoading ? {} : { backgroundImage: 'url(https://valery-yershov-art.s3.amazonaws.com/background.jpg)' })
       }}
     >
       <Router>
+        <ScrollToTop />
         <NavComponent />
         <Switch>
           <Route exact path="/"> 

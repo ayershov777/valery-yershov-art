@@ -1,9 +1,11 @@
-import React from 'react'
+import React from 'react';
 
-export default function TechniquePage() {
+import CarouselComponent from './CarouselComponent';
+
+export default function TechniquePage({ data }) {
   return (
     <div>
-      TechniquePage
+      <CarouselComponent slideshow={[ data.photos.test1, data.photos.test1 ]} />
     </div>
   );
 }
