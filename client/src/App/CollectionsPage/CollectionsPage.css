@@ -1,0 +1,14 @@
+.CollectionsPage {
+  background-color: rgba(0, 0, 0, 0.90);
+  margin: 2vw;
+  box-shadow: 0 0 10px black;
+  padding: 2vw 2vw 0 2vw;
+}
+
+.CollectionsPage > h3 {
+  text-align: center;
+  color: white;
+  font-size: 3vw;
+  text-shadow: 0px 0px 3px white;
+  margin-bottom: 2vw;
+}

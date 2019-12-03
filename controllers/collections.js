@@ -3,7 +3,7 @@ const Collection = require('../models/collection');
 async function getAllCollections(req, res, next) {
   try {
     const conditions = req.query.show_hidden === "true" ? {} : { public: true };
-    const collections = await Collection.find(conditions).lean();
+    const collections = await Collection.find(conditions).populate('works.photo').lean();
     res.json({ collections });
   } catch(err) {
     next(err);
@@ -12,7 +12,7 @@ async function getAllCollections(req, res, next) {
 
 async function getCollection(req, res, next) {
   try {
-    const collection = await Collection.findById(req.params.id).lean();
+    const collection = await Collection.findById(req.params.id).populate('works.photo').lean();
     if(!collection) return res.status(404).send('collection id not found');
     res.json({ collection });
   } catch(err) {

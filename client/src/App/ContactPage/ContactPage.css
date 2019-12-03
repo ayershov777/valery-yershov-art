@@ -1,5 +1,7 @@
 .ContactPage {
   padding: 5vh 20vw;
+  background: rgba(32, 32, 32, 0.85);
+  color: white;
 }
 
 @media screen and (max-width: 500px) {

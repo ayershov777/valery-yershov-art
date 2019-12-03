@@ -1,7 +1,7 @@
-import React from 'react';
-import Navbar from 'react-bootstrap/Navbar'
-import Nav from 'react-bootstrap/Nav'
-import NavDropdown from 'react-bootstrap/NavDropdown'
+import React, { useState } from 'react';
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
+// import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Link } from 'react-router-dom';
 
 import './NavComponent.css';
@@ -15,10 +15,11 @@ export default function NavComponent() {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="m-auto">
-          <NavDropdown className="NavItem" title="Latest Collections" id="basic-nav-dropdown">
+          {/* <NavDropdown className="NavItem" title="Latest Collections" id="basic-nav-dropdown" >
             <NavDropdown.Item as={Link} to="/collections/seaside">Seaside</NavDropdown.Item>
             <NavDropdown.Item as={Link} to="/collections/underground">Underground</NavDropdown.Item>
-          </NavDropdown>
+          </NavDropdown> */}
+          <Nav.Link className="NavItem" as={Link} to="/collections">Latest Collections</Nav.Link>
           <Nav.Link className="NavItem" as={Link} to="/technique">Discover the Technique</Nav.Link>
           <Nav.Link className="NavItem" as={Link} to="/history">History</Nav.Link>
           <Nav.Link className="NavItem" as={Link} to="/prior_works">Prior Work</Nav.Link>

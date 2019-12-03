@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -6,6 +6,7 @@ import {
 } from 'react-router-dom';
 
 import HomePage from './HomePage';
+import CollectionsPage from './CollectionsPage';
 import CollectionPage from './CollectionPage';
 import HistoryPage from './HistoryPage';
 import TechniquePage from './TechniquePage';
@@ -20,7 +21,7 @@ import './App.css';
 function App() {
   const mq = window.matchMedia("(min-device-width: 1367px)");
   const [width, height] = useWindowSize();
-
+  
   const [backgroundLoading, setBackgroundLoading] = useState(true);
 
   const [pageData, setPageData] = useState(null);
@@ -93,7 +94,7 @@ function App() {
         top: 0,
         zIndex: -1000,
         minHeight: '100vh',
-        minWidth: '100vw',
+        width: '100vw',
         ...( backgroundLoading ? {} : { backgroundImage: 'url(https://valery-yershov-art.s3.amazonaws.com/background.jpg)' })
       }}
     >
@@ -104,8 +105,12 @@ function App() {
             {pageData && <HomePage data={pageData.front} />}
           </Route>
 
-          <Route exact path="/collections/:title/:chicken">
-            <CollectionPage />
+          <Route exact path="/collections">
+            {collections && <CollectionsPage collections={collections} />}
+          </Route>
+
+          <Route exact path="/collections/:title">
+            {collections && <CollectionPage collections={collections} />}
           </Route>
           
           <Route exact path="/technique">
