@@ -21,32 +21,35 @@ export default function CoverComponent({ collection, title, idx }) {
 
   const Description = () => (
     <div className="Description">
-      <h3>“{title}”</h3>
+      <Link to={`/collections/${title}`} style={{ color: 'white', textDecoration: 'none' }}>
+        <h3 className='title'>“{title}”</h3>
+      </Link>
       <p>{collection.description}</p>
-      {/* <span /> */}
     </div>
   );
 
   return (
     screenSmall
-    ? <div className="CoverComponent-Mobile" style={{ height: imageHeight }}>
-        <ImageComponent
-          photo={collection.works[collection.coverIndex].photo}
-          style={{ position: 'relative', width: '100vw' }}
-          setImageHeight={setImageHeight}
-        />
-        <h3
-          style={{
-            position: 'relative',
-            top: `calc(${-imageHeight/2}px - 1.25em)`,
-            textAlign: 'center',
-            backgroundColor: 'rgba(32, 32, 32, 0.6)',
-            color: 'white',
-            lineHeight: '2.5em',
-            textTransform: 'capitalize' }}
-        >
-          {title}
-        </h3>
+    ? <div className="CoverComponent-Mobile" style={{ height: `calc(${imageHeight}px + 2vw)` }}>
+        <Link to={`/collections/${title}`}>
+          <ImageComponent
+            photo={collection.works[collection.coverIndex].photo}
+            style={{ position: 'relative', width: '92vw' }}
+            setImageHeight={setImageHeight}
+          />
+          <h3
+            style={{
+              position: 'relative',
+              top: `calc(${-imageHeight/2}px - 1.25em)`,
+              textAlign: 'center',
+              backgroundColor: 'rgba(32, 32, 32, 0.6)',
+              color: 'white',
+              lineHeight: '2.5em',
+              textTransform: 'capitalize' }}
+          >
+            {title}
+          </h3>
+        </Link>
       </div>
     : <div className="CoverComponent">
         {idx % 2 === 0

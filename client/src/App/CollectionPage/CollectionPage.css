@@ -11,7 +11,7 @@
   text-align: center;
   color: white;
   font-size: 3vw;
-  text-shadow: 0px 0px 3px white;
+  text-shadow: 0px 0px 4px white;
   margin-bottom: 2vw;
 }
 
@@ -20,7 +20,7 @@ div.fade.modal.show {
 }
 
 div.modal-content {
-  background-color: black;
+  background-color: rgb(40, 40, 40);
   color: white;
   text-shadow: 0 0 3px white;
 }
@@ -29,8 +29,13 @@ div.modal-header button.close span {
   color: white;
 }
 
+div.modal-title.h4 {
+  font-family: 'Abel', sans-serif;
+}
+
 div.modal-body {
-  background-color: darkslategray;
+  margin: -1px 0;
+  background-color: rgb(50, 50, 50);
   text-shadow: none;
 }
 

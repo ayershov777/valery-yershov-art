@@ -20,7 +20,7 @@ export default function NavComponent() {
             <NavDropdown.Item as={Link} to="/collections/underground">Underground</NavDropdown.Item>
           </NavDropdown> */}
           <Nav.Link className="NavItem" as={Link} to="/collections">Latest Collections</Nav.Link>
-          <Nav.Link className="NavItem" as={Link} to="/technique">Discover the Technique</Nav.Link>
+          {/* <Nav.Link className="NavItem" as={Link} to="/technique">Discover the Technique</Nav.Link> */}
           <Nav.Link className="NavItem" as={Link} to="/history">History</Nav.Link>
           <Nav.Link className="NavItem" as={Link} to="/prior_works">Prior Work</Nav.Link>
           <Nav.Link className="NavItem" as={Link} to="/contact">Contact Valery</Nav.Link>

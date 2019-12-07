@@ -32,7 +32,8 @@ export default function WorkComponent({ handleShow, work, isEven }) {
       <div>
         <div>
           <h3>{work.title}</h3>
-          <Button onClick={() => handleShow(work)} variant="info" style={{ textShadow: '2px 2px 5px black' }}>Watch 3D video</Button>
+          {work.videoUrl &&
+            <Button onClick={() => handleShow(work)} variant="info" style={{ textShadow: '2px 2px 5px black' }}>Watch 3D video</Button>}
         </div>
         <div style={{ paddingLeft: '32px', paddingTop: '16px' }}>
           <p>Medium: {work.mediumLabel}</p>
