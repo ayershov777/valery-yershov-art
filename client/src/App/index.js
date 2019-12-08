@@ -124,9 +124,9 @@ function App() {
             {pageData && exhibitions && <HistoryPage data={pageData.history} exhibitions={exhibitions} />}
           </Route>
 
-          <Route exact path="/prior_works">
+          {/* <Route exact path="/prior_works">
             {pageData && collections && <PriorWorksPage data={pageData.priorWork} priorWorks={collections['prior']} />}
-          </Route>
+          </Route> */}
 
           <Route exact path="/contact">
             <ContactPage />

@@ -22,7 +22,7 @@ export default function NavComponent() {
           <Nav.Link className="NavItem" as={Link} to="/collections">Latest Collections</Nav.Link>
           {/* <Nav.Link className="NavItem" as={Link} to="/technique">Discover the Technique</Nav.Link> */}
           <Nav.Link className="NavItem" as={Link} to="/history">History</Nav.Link>
-          <Nav.Link className="NavItem" as={Link} to="/prior_works">Prior Work</Nav.Link>
+          <Nav.Link className="NavItem" as={Link} to="/collections/prior">Prior Work</Nav.Link>
           <Nav.Link className="NavItem" as={Link} to="/contact">Contact Valery</Nav.Link>
         </Nav>
         <Nav className="ml-auto">

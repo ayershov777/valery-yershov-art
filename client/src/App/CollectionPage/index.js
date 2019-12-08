@@ -13,6 +13,8 @@ export default function CollectionPage({ collections }) {
   let { title } = useParams();
   let collection = collections[title];
 
+  console.log(collections, collection)
+
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -21,7 +23,7 @@ export default function CollectionPage({ collections }) {
   return (
     <div className="CollectionPage">
       <VideoModal show={show} handleClose={handleClose} />
-      <h3 style={{ fontSize: isSmall ? '30pt' : '34pt' }}>{title} collection</h3>
+      <h3 style={{ fontSize: isSmall ? '30pt' : '34pt' }}>{title} {title === 'prior' ? 'works' : 'collection'}</h3>
       {collection.works.map((work, idx) =>
         <WorkComponent handleShow={handleShow} work={collection.works[idx]} isEven={idx%2 === 0}/>
       )}
