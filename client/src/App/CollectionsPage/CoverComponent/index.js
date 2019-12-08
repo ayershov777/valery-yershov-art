@@ -21,7 +21,7 @@ export default function CoverComponent({ collection, title, idx }) {
 
   const Description = () => (
     <div className="Description">
-      <Link to={`/collections/${title}`} style={{ color: 'white', textDecoration: 'none' }}>
+      <Link to={`/collections/${title}`} style={{ color: 'black', textDecoration: 'none' }}>
         <h3 className='title'>“{title}”</h3>
       </Link>
       <p>{collection.description}</p>
@@ -43,7 +43,7 @@ export default function CoverComponent({ collection, title, idx }) {
               top: `calc(${-imageHeight/2}px - 1.25em)`,
               textAlign: 'center',
               backgroundColor: 'rgba(32, 32, 32, 0.6)',
-              color: 'white',
+              color: 'black',
               lineHeight: '2.5em',
               textTransform: 'capitalize' }}
           >
