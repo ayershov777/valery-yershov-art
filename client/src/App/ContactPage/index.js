@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 
 import './ContactPage.css';
 
@@ -10,6 +11,14 @@ export default function ContactPage() {
 
   const [sent, setSent] = useState(false);
   const [sending, setSending] = useState(false);
+
+  const handleReset = () => {
+    setSent(false);
+    setSending(false);
+    setSubject('');
+    setTextBody('');
+    setContactInfo('');
+  }
 
   const onSubmit = e => {
     e.preventDefault();
@@ -34,7 +43,12 @@ export default function ContactPage() {
       <h2>Studio Contact</h2>
 
       {sent
-      ? <h2>Thank you, your email has been sent.</h2>
+      ? <div>
+          <h2>Thank you, your email has been sent.</h2>
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <Button variant="outline-light" onClick={handleReset}>Send another</Button>
+          </div>
+        </div>
       : <Form onSubmit={onSubmit}>
           <Form.Group>
             <label>Subject:</label>
@@ -50,8 +64,8 @@ export default function ContactPage() {
           </Form.Group>
           <div className="flex-center">
             {sending
-            ? <input disabled id="submit" type="submit" value="sending" className="btn btn-outline-primary btn-lg"/>
-            : <input id="submit" type="submit" value="send" className="btn btn-outline-primary btn-lg"/>}
+            ? <input disabled id="submit" type="submit" value="sending" className="btn btn-outline-light btn-lg"/>
+            : <input id="submit" type="submit" value="send" className="btn btn-outline-light btn-lg"/>}
           </div>
         </Form>}
 
