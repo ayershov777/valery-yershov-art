@@ -15,8 +15,13 @@
   text-align: center;
 }
 
-.ContactPage td {
+.ContactPage table:not(.contact-info) td {
   display: block;
+}
+
+.contact-info {
+  display: table;
+  margin: auto;
 }
 
 .ContactPage input:not(#submit),

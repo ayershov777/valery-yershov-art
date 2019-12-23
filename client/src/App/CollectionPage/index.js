@@ -13,8 +13,6 @@ export default function CollectionPage({ collections }) {
   let { title } = useParams();
   let collection = collections[title];
 
-  console.log(collections, collection)
-
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);

@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
+import MapComponent from '../MapComponent';
+
 import './ContactPage.css';
 
 export default function ContactPage() {
@@ -41,7 +43,28 @@ export default function ContactPage() {
   return (
     <div className="ContactPage">
       <h2>Studio Contact</h2>
+      <br />
 
+      <h3>Contact information</h3>
+      <table className="contact-info" style={{ width: '100%' }}>
+        <tr>
+          <td>Phone</td>
+          <td>(917) 836-3465</td>
+        </tr>
+        <tr>
+          <td>Email</td>
+          <td>artyershov@yahoo.com</td>
+        </tr>
+        <tr>
+          <td>Web Developer</td>
+          <td>anthony.yershov@gmail.com</td>
+        </tr>
+      </table>
+
+      <hr style={{ border: '1px solid white' }} />
+      <br />
+
+      <h3 style={{ textAlign: 'center' }}>Send us an email</h3>
       {sent
       ? <div>
           <h2>Thank you, your email has been sent.</h2>
@@ -69,6 +92,18 @@ export default function ContactPage() {
           </div>
         </Form>}
 
+        <hr style={{ border: '1px solid white' }} />
+        <br />
+
+        <h2>Studio Address</h2>
+        <div 
+          style={{
+            display: 'flex',
+            justifyContent: 'center'
+          }}
+        >
+          <MapComponent />
+        </div>
     </div>
   );
 }

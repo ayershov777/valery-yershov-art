@@ -48,6 +48,8 @@ export default function ImageComponent(props) {
         overflow: 'hidden',
         backgroundColor: 'gray',
         maxWidth: '100%',
+        // width: actualWidth/scale,
+        // height: scale*actualHeight,
         ...( loading? { width: actualWidth, height: actualHeight } : {}),
         ...( phLoading ? {} : { backgroundImage: `url(${props.photo.blurUrl})`, backgroundSize: 'cover' }),
       }}
