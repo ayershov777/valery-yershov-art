@@ -3,7 +3,7 @@ import React from 'react'
 export default function QuotesComponent({ quotes, authors }) {
   const screenSmall = window.matchMedia("(max-width: 500px)").matches;
   const screenMedium = !screenSmall && window.matchMedia("(max-width: 1024px)").matches;
-  const screenLarge = !screenSmall && !screenMedium;
+  //const screenLarge = !screenSmall && !screenMedium;
 
   if(screenSmall) {
     var quoteSize = '5vw';

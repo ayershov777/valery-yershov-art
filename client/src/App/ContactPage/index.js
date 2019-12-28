@@ -47,18 +47,20 @@ export default function ContactPage() {
 
       <h3>Contact information</h3>
       <table className="contact-info" style={{ width: '100%' }}>
-        <tr>
-          <td>Phone</td>
-          <td>(917) 836-3465</td>
-        </tr>
-        <tr>
-          <td>Email</td>
-          <td>artyershov@yahoo.com</td>
-        </tr>
-        <tr>
-          <td>Web Developer</td>
-          <td>anthony.yershov@gmail.com</td>
-        </tr>
+        <tbody>
+          <tr>
+            <td>Phone</td>
+            <td>(917) 836-3465</td>
+          </tr>
+          <tr>
+            <td>Email</td>
+            <td>artyershov@yahoo.com</td>
+          </tr>
+          <tr>
+            <td>Web Developer</td>
+            <td>anthony.yershov@gmail.com</td>
+          </tr>
+        </tbody>
       </table>
 
       <hr style={{ border: '1px solid white' }} />

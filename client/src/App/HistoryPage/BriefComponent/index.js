@@ -13,7 +13,7 @@ export default function BriefComponent({ photo, text }) {
   const [pHeight, setPHeight] = useState(0);
   const pRef = useRef(null);
 
-  useEffect(() => setPHeight(pRef.current.clientHeight));
+  useEffect(() => setPHeight(pRef.current.clientHeight), []);
 
   return (
     <div className="BriefComponent">

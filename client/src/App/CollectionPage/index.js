@@ -23,7 +23,7 @@ export default function CollectionPage({ collections }) {
       <VideoModal show={show} handleClose={handleClose} />
       <h3 style={{ fontSize: isSmall ? '30pt' : '34pt' }}>{title} {title === 'prior' ? 'works' : 'collection'}</h3>
       {collection.works.map((work, idx) =>
-        <WorkComponent handleShow={handleShow} work={collection.works[idx]} isEven={idx%2 === 0}/>
+        <WorkComponent key={collection.works[idx].title} handleShow={handleShow} work={collection.works[idx]} isEven={idx%2 === 0}/>
       )}
       <div className="flex-center">
         <Button as={Link} to="/collections" variant="outline-light" size="lg">Back to all collections</Button>
@@ -33,7 +33,6 @@ export default function CollectionPage({ collections }) {
 }
 
 const VideoModal = ({show, handleClose}) => {
-  console.log(show);
   return !!show &&
     <Modal show={!!show} onHide={handleClose} size="lg" backdropClassName="modal-backdrop">
       <Modal.Header closeButton>

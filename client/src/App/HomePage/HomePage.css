@@ -7,3 +7,7 @@
   /* padding-bottom: 100vh; */
   min-height: calc(100vh - 62px)
 }
+
+.HomePage .front-image:hover {
+  cursor: pointer;
+}

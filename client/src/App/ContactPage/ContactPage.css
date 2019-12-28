@@ -19,11 +19,6 @@
   display: block;
 }
 
-.contact-info {
-  display: table;
-  margin: auto;
-}
-
 .ContactPage input:not(#submit),
 .ContactPage textarea {
   display: block;

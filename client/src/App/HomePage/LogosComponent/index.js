@@ -4,7 +4,7 @@ import ImageComponent from '../../ImageComponent';
 
 export default function LogosComponent({ logos }) {
 
-  console.log(logos);
+  // console.log(logos);
 
   return (
     <div 

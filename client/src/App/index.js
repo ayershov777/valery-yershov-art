@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -13,7 +13,6 @@ import CollectionPage from './CollectionPage';
 import HistoryPage from './HistoryPage';
 import TechniquePage from './TechniquePage';
 import ContactPage from './ContactPage';
-import PriorWorksPage from './PriorWorksPage';
 import NavComponent from './NavComponent';
 
 import useWindowSize from '../hooks/windowSize';

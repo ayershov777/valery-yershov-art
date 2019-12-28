@@ -36,9 +36,9 @@ export default function WorkComponent({ handleShow, work, isEven }) {
             <Button onClick={() => handleShow(work)} variant="info" style={{ textShadow: '2px 2px 5px black' }}>Watch 3D video</Button>}
         </div>
         <div style={{ paddingLeft: '32px', paddingTop: '16px' }}>
+          <p>Size: {work.sizeLabel}</p>
           <p>Medium: {work.mediumLabel}</p>
           <p>Year: {work.yearLabel}</p>
-          <p>Size: {work.sizeLabel}</p>
         </div>
       </div>
     </div>
@@ -50,7 +50,7 @@ export default function WorkComponent({ handleShow, work, isEven }) {
         <hr style={{ borderTop: '1px solid white', width: '100%', height: 0 }} />
         <h3 style={{ textAlign: 'center', color: 'white' }}>{work.title}</h3>
         <ImageComponent photo={work.photo} style={{ width: '100%' }} />
-        <Button onClick={() => handleShow(work)} variant="info" style={{ marginTop: '4px', width: '100%', textShadow: '2px 2px 5px black' }}>Watch 3D video</Button>
+        {work.videoUrl && <Button onClick={() => handleShow(work)} variant="info" style={{ marginTop: '4px', width: '100%', textShadow: '2px 2px 5px black' }}>Watch 3D video</Button>}
         <div style={{ paddingTop: '16px', color: 'white' }}>
           <p>Medium: {work.mediumLabel}</p>
           <p>Year: {work.yearLabel}</p>
