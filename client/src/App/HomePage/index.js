@@ -1,7 +1,10 @@
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
-import ImageComponent from '../ImageComponent';
+import useWindowSize from '../../hooks/windowSize';
+
+import SmoothImage from '../SmoothImage';
+// import ImageComponent from '../ImageComponent';
 import LogosComponent from './LogosComponent';
 import QuotesComponent from './QuotesComponent';
 
@@ -10,9 +13,11 @@ import Button from 'react-bootstrap/Button';
 import './HomePage.css'
 
 function HomePage({ data }) {
+  const screenMedium = window.matchMedia("(min-width: 1024px)").matches;
   const screenLarge = window.matchMedia("(min-width: 1367px)").matches;
 
   const history = useHistory();
+
   
   const logos = [
     data.photos.sothebys_logo,
@@ -42,7 +47,6 @@ function HomePage({ data }) {
   ];
 
   const authors = [ 'Natalia Kolodzei', 'Darren Jones', 'Herman Hesse' ];
-
   return (
     <div className="HomePage">
       <div
@@ -50,62 +54,92 @@ function HomePage({ data }) {
           backgroundColor: ( screenLarge ? 'rgba(255, 255, 255, 0.5)' : 'none' )
         }}
       >
-        <div
-          className="flex-center"
-          style={{
-            paddingTop: '4vh'
-          }}
-        >
+
+        {/* FrontImageComponent */}
+        <div className="flex-center">
           <div
-            className="front-image"
+            className="clickable"
             onClick={() => history.push('/collections')}
-            style={{
-              overflow: 'hidden',
-              position: 'relative',
+            style={{ 
+              border: '4px solid gray',
               borderRadius: '50%',
-              border: '1px solid brown'
+              overflow: 'hidden',
+              marginTop: '2vh'
             }}
           >
-            <ImageComponent
+            <SmoothImage
               photo={data.photos.octopus}
               style={{
-                width: screenLarge ? '40vw' : '90vw',
-                // border: '5px double black',
-                // borderRadius: '20vw'
+                width: screenMedium ? '45vw' : '90vw',
+                height: 
+                (() => {
+                  let photo = data.photos.octopus;
+                  let width = window.innerWidth * (screenMedium ? 0.45 : 0.9);
+                  let scale = width / photo.pxWidth;
+                  let height = photo.pxHeight * scale;
+                  return height;
+                })()
               }}
             />
           </div>
         </div>
+
         <QuotesComponent quotes={quotes} authors={authors} />
         <LogosComponent logos={logos} />
 
         {/* StudioComponent */}
-        <h3 
+        <div
           style={{
-            textShadow: '0px 0px 2px #323232',
-            textAlign: 'center',
+            backgroundImage: !screenLarge && `url(${data.photos.front.mainUrl})`,
+            backgroundSize: 'cover',
+            height:
+              (() => {
+                let photo = data.photos.front;
+                let width = window.innerWidth;
+                let scale = width / photo.pxWidth;
+                let height = photo.pxHeight * scale;
+                return height;
+              })(),
             paddingTop: '10vh'
           }}
         >
-          Valery works in his beautiful studio in Hell's Kitchen, New York City. We invite you to come and visit us!
-        </h3>
-        <div
-          style={{
-            display: 'flex', justifyContent: 'center', padding: '2vw 0 0 0'
-          }}
-        >
-          <Button 
-            variant="dark"
+          <h3 
             style={{
-              fontSize: '2vw', textAlign: 'center', textShadow: '0 0 1px black'
+              backgroundColor: !screenLarge && 'rgba(32, 32, 32, 0.5)',
+              color: !screenLarge && 'white',
+              textShadow: `0px 0px 10px ${screenLarge? '#323232' : 'white'}`,
+              textAlign: 'center',
+              paddingTop: '1vw'
             }}
-            as={Link}
-            to="/contact"
           >
-            Visit the Studio
-          </Button>
+            Valery works in his beautiful studio in Hell's Kitchen, New York City. We invite you to come and visit us!
+          </h3>
+
+          <div
+            style={{
+              display: 'flex', justifyContent: 'center', padding: '2vw 0 0 0'
+            }}
+          >
+            <Button 
+              variant="dark"
+              // size={screenLarge ? 'sm': 'lg'}
+              style={{
+                fontSize: screenLarge? '2vw' : '5vw',
+                textAlign: 'center',
+                textShadow: '0 0 1px black',
+                minWidth: '256px'
+              }}
+              as={Link}
+              to="/contact"
+            >
+              Visit the Studio
+            </Button>
+          </div>
         </div>
+
       </div>
+
+      {/* FrontComponent */}
       {screenLarge &&
         <div
           style={{

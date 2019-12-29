@@ -9,7 +9,7 @@ export default function CoverComponent({ collection, title, idx }) {
   const [imageHeight, setImageHeight] = useState(0);
   const screenSmall = window.matchMedia('(max-width: 640px)').matches;
 
-  // console.log(collection.works);
+  console.log(collection.works);
 
   const CoverImage = () => (
     <Link to={`/collections/${title}`} className="CollectionLink" style={{ height: imageHeight }}>

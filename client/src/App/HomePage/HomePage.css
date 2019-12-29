@@ -1,5 +1,5 @@
 .App-Desktop .HomePage{
-  background-image: url(https://valeryyershov.s3.amazonaws.com/misc/background.png);
+  background-image: url(https://valery-yershov-art.s3.amazonaws.com/front.jpg);
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
@@ -9,5 +9,9 @@
 }
 
 .HomePage .front-image:hover {
+  cursor: pointer;
+}
+
+.clickable:hover {
   cursor: pointer;
 }

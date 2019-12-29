@@ -26,7 +26,8 @@ export default function QuotesComponent({ quotes, authors }) {
         }}
         >
         {quotes.map((quote, idx) => 
-          <div 
+          <div
+            key={idx}
             style={{
               padding: '3vh',
               marginBottom: '10vw',

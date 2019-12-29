@@ -9,6 +9,7 @@ const photoSchema = mongoose.Schema({
     type: String,
     required: true
   },
+  highUrl: String,
   mainKey: {
     type: String,
     required: true

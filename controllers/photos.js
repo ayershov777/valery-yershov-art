@@ -70,7 +70,7 @@ async function getPhoto(req, res, next) {
 
 async function createPhoto(req, res, next) {
   try {
-    const photo_info = await handlePhotos(req.file, { alt: req.body.alt });
+    const photo_info = await handlePhotos(req.file, { alt: req.body.alt, highUrl: req.body.highUrl });
     const photo = await Photo.create(photo_info);
     req.nextCb = () => {
       res.status(201).send({ _id: photo.id });
@@ -86,6 +86,9 @@ async function updatePhoto(req, res, next) {
     let photo_info = {};
     if(req.body.alt)
       photo_info.alt = req.body.alt;
+
+    if(req.body.highUrl)
+      photo_info.highUrl = req.body.highUrl;
     
     if(req.file)
       photo_info = await handlePhotos(req.file, photo_info);
