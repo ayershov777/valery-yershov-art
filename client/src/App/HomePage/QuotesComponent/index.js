@@ -20,14 +20,20 @@ export default function QuotesComponent({ quotes, authors }) {
     <div style={{ padding: '5vw' }}>
       <div
         style={{
-          backgroundColor: 'rgba(0, 0, 0, 0.9)',
-          color: 'white',
-          textShadow: '0 0 2px white',
-          padding: '3vw'
+          color: 'black',
+          textShadow: '0 0 2px #323232',
+          padding: '0 3vw'
         }}
         >
         {quotes.map((quote, idx) => 
-          <div>
+          <div 
+            style={{
+              padding: '3vh',
+              marginBottom: '10vw',
+              backgroundColor: 'rgba(255, 255, 255, 0.3)',
+              border: '1px dotted brown',
+            }}
+          >
             <p
               style={{
                 fontSize: quoteSize,

@@ -3,12 +3,10 @@ import React from 'react';
 import ImageComponent from '../../ImageComponent';
 
 export default function LogosComponent({ logos }) {
-
-  // console.log(logos);
-
   return (
     <div 
       style={{
+        marginTop: '-10vw',
         display: 'flex',
         flexWrap: 'wrap',
         justifyContent: 'space-evenly',

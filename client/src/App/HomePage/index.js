@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import ImageComponent from '../ImageComponent';
 import LogosComponent from './LogosComponent';
@@ -11,6 +11,8 @@ import './HomePage.css'
 
 function HomePage({ data }) {
   const screenLarge = window.matchMedia("(min-width: 1367px)").matches;
+
+  const history = useHistory();
   
   const logos = [
     data.photos.sothebys_logo,
@@ -33,11 +35,10 @@ function HomePage({ data }) {
     paintings strike and amaze the viewer's imagination, appealing to the viewer on both
     analytical and emotional levels while illuminating many aspects of the human experience`,*/
     `Valery Yershov's career as one of Russia's most accomplished contemporary artists, spans
-    vast geographical, political, and social changes.`,/* As a result of bearing witness to these
+    vast geographical, political, and social changes.`/* As a result of bearing witness to these
     tectonic shifts in the collective experience of humanity, the artist and the man have 
     combined in the work, to present an unfettered vision of the world and to provide a
-    barometer to some of the most profound cultural developments of the last 50 years.`,*/
-    `Eternity is a mere moment, just long enough for a joke.`
+    barometer to some of the most profound cultural developments of the last 50 years.`*/
   ];
 
   const authors = [ 'Natalia Kolodzei', 'Darren Jones', 'Herman Hesse' ];
@@ -57,15 +58,7 @@ function HomePage({ data }) {
         >
           <div
             className="front-image"
-            onClick={e => {
-              if (e.target.requestFullscreen) { // W3C API
-                e.target.requestFullscreen();
-              } else if (e.target.mozRequestFullscreen) { // Mozilla current API
-                e.target.mozRequestFullscreen();
-              } else if (e.target.webkitRequestFullscreen) { // Webkit current API
-                e.target.webkitRequestFullscreen();
-              } // Maybe other prefixed APIs?
-            }}
+            onClick={() => history.push('/collections')}
           >
             <ImageComponent
               photo={data.photos.elements_installation}
@@ -76,6 +69,19 @@ function HomePage({ data }) {
             />
           </div>
         </div>
+        <QuotesComponent quotes={quotes} authors={authors} />
+        <LogosComponent logos={logos} />
+
+        {/* StudioComponent */}
+        <h3 
+          style={{
+            textShadow: '0px 0px 2px #323232',
+            textAlign: 'center',
+            paddingTop: '10vh'
+          }}
+        >
+          Valery works in his beautiful studio in Hell's Kitchen, New York City. We invite you to come and visit us!
+        </h3>
         <div
           style={{
             display: 'flex', justifyContent: 'center', padding: '2vw 0 0 0'
@@ -89,11 +95,9 @@ function HomePage({ data }) {
             as={Link}
             to="/contact"
           >
-            Schedule a studio visit!&nbsp;&nbsp;
+            Visit the Studio
           </Button>
         </div>
-        <QuotesComponent quotes={quotes} authors={authors} />
-        <LogosComponent logos={logos} />
       </div>
       {screenLarge &&
         <div
