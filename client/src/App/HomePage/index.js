@@ -61,9 +61,9 @@ function HomePage({ data }) {
             onClick={() => history.push('/collections')}
           >
             <ImageComponent
-              photo={data.photos.elements_installation}
+              photo={data.photos.octopus}
               style={{
-                width: screenLarge ? '30vw' : '90vw',
+                width: screenLarge ? '40vw' : '90vw',
                 border: '5px double black'
               }}
             />
