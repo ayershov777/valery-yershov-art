@@ -105,9 +105,9 @@ function HomePage({ data }) {
         >
           <h3 
             style={{
-              backgroundColor: !screenLarge && 'rgba(32, 32, 32, 0.5)',
-              color: !screenLarge && 'white',
-              textShadow: `0px 0px 10px ${screenLarge? '#323232' : 'white'}`,
+              backgroundColor: !screenLarge && 'rgba(255, 255, 255, 0.4)',
+              color: !screenLarge && 'black',
+              textShadow: `0px 0px 3px ${screenLarge? '#323232' : 'white'}`,
               textAlign: 'center',
               paddingTop: '1vw'
             }}
