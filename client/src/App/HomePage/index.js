@@ -59,12 +59,19 @@ function HomePage({ data }) {
           <div
             className="front-image"
             onClick={() => history.push('/collections')}
+            style={{
+              overflow: 'hidden',
+              position: 'relative',
+              borderRadius: '50%',
+              border: '1px solid brown'
+            }}
           >
             <ImageComponent
               photo={data.photos.octopus}
               style={{
                 width: screenLarge ? '40vw' : '90vw',
-                border: '5px double black'
+                // border: '5px double black',
+                // borderRadius: '20vw'
               }}
             />
           </div>
