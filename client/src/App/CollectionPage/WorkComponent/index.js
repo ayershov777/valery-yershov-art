@@ -9,7 +9,7 @@ import './WorkComponent.css';
 
 export default function WorkComponent({ handleShow, work, isEven }) {
   const [imageHeight, setImageHeight] = useState(0);
-  const screenSmall = window.matchMedia('(max-width: 768px)').matches;
+  const screenMedium = window.matchMedia('(max-width: 1024px)').matches;
 
   const history = useHistory();
 
@@ -58,7 +58,7 @@ export default function WorkComponent({ handleShow, work, isEven }) {
   );
 
   return (
-    screenSmall
+    screenMedium
     ? <div className="WorkComponent" style={{ flexDirection: 'column' }}>
         <hr style={{ borderTop: '1px solid black', width: '100%', height: 0 }} />
         <h3 style={{ textAlign: 'center', color: 'black' }}>{work.title}</h3>
