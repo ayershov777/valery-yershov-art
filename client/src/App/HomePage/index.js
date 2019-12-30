@@ -89,7 +89,7 @@ function HomePage({ data }) {
               border: '1px solid gray',
               borderRadius: '50%',
               overflow: 'hidden',
-              marginTop: '2vh'
+              marginTop: '4vh'
             }}
           >
             <SmoothImage
