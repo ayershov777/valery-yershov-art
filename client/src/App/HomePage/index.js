@@ -129,9 +129,9 @@ function HomePage({ data }) {
         >
           <h3 
             style={{
-              backgroundColor: !screenLarge && 'rgba(255, 255, 255, 0.4)',
+              backgroundColor: !screenLarge && 'rgba(255, 255, 255, 0.7)',
               color: !screenLarge && 'black',
-              textShadow: `0px 0px 3px ${screenLarge? '#323232' : 'white'}`,
+              textShadow: `0px 0px 3px #323232`,
               textAlign: 'center',
               padding: '2vw'
             }}
@@ -146,10 +146,11 @@ function HomePage({ data }) {
             <Button 
               variant="dark"
               style={{
-                fontSize: screenLarge? '2vw' : '5vw',
+                fontSize: screenLarge ? '2vw' : screenMedium ? '3vw' : '5vw',
                 textAlign: 'center',
                 textShadow: '0 0 1px black',
-                minWidth: '256px', }}
+                minWidth: '256px',
+                padding: screenMedium && !screenLarge && '15px' }}
               as={Link}
               to="/contact"
             > Visit the Studio </Button>
