@@ -81,9 +81,10 @@ function App() {
         title: 'featured',
         works: [
           json.collections[2].works[0], // rhino territory
-          json.collections[1].works[4], // feeling threatened
-          json.collections[2].works[4], // megalodon in the bronx
           json.collections[1].works[0], // ocean master
+          json.collections[2].works[4], // megalodon in the bronx
+          json.collections[1].works[1], // elephant bath
+          json.collections[1].works[4], // feeling threatened
           json.collections[1].works[3], // the opportunist
           json.collections[1].works[10], // hippocampus cuda
           json.collections[2].works[2], // mans last friend
@@ -99,7 +100,6 @@ function App() {
 
       json.collections[1].works = elementsOrder;
       json.collections[2].works = undergroundOrder;
-
       
       const collections = dataArrayToObject(json.collections);
       setCollections(collections);

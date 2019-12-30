@@ -80,8 +80,6 @@ function HomePage({ data }) {
         }}
       >
 
-        <Link to="/collections/featured">featured works</Link>
-
         {/* FrontImageComponent */}
         <div className="flex-center">
           <div
@@ -109,6 +107,13 @@ function HomePage({ data }) {
               }}
             />
           </div>
+        </div>
+
+        {/* art fair component */}
+        <div className="flex-center" style={{ marginTop: '3vw', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
+          <h3 style={{ color: 'black '}}>Valery will be presenting his works at Palm Beach Modern + Contemporary, on January 9th</h3>
+          <Button as={Link} to="/collections/featured" variant="outline-dark">See featured works</Button>
+          <SmoothImage photo={data.photos.palm_beach} style={{ backgroundColor: 'white', border: '1px solid gray', marginTop: '1vw', padding: '0 2vw 2vw 2vw', width: '60vw' }} />
         </div>
 
         {screenMedium ? <QuotesComponent quotes={quotes} authors={authors} /> : <><br /><br /></>}
