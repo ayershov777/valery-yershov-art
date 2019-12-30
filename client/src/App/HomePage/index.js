@@ -80,6 +80,8 @@ function HomePage({ data }) {
         }}
       >
 
+        <Link to="/collections/featured">featured works</Link>
+
         {/* FrontImageComponent */}
         <div className="flex-center">
           <div
