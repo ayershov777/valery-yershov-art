@@ -112,8 +112,8 @@ function HomePage({ data }) {
         <LogosComponent logos={logos} />
 
         {/* StudioComponent */}
-        {!screenLarge && <div
-          style={{
+        <div
+          style={!screenLarge ? {
             backgroundImage: !screenLarge && `url(${data.photos.front.mainUrl})`,
             backgroundSize: 'cover',
             height:
@@ -125,7 +125,7 @@ function HomePage({ data }) {
                 return height;
               })(),
             paddingTop: '7vh'
-          }}
+          }: {}}
         >
           <h3 
             style={{
@@ -141,24 +141,22 @@ function HomePage({ data }) {
 
           <div
             style={{
-              display: 'flex', justifyContent: 'center', padding: '2vw 0 0 0'
-            }}
-          >
+              display: 'flex', justifyContent: 'center', padding: '2vw 0 0 0' }}
+            >
             <Button 
               variant="dark"
               style={{
                 fontSize: screenLarge? '2vw' : '5vw',
                 textAlign: 'center',
                 textShadow: '0 0 1px black',
-                minWidth: '256px',
-              }}
+                minWidth: '256px', }}
               as={Link}
               to="/contact"
-            >
-              Visit the Studio
-            </Button>
+            > Visit the Studio </Button>
           </div>
-        </div>}
+        </div>
+
+
       </div>
 
       {/* FrostComponent */}

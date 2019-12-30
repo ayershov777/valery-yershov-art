@@ -66,7 +66,7 @@ export default function ContactPage() {
       <hr style={{ border: '1px solid white' }} />
       <br />
 
-      <h3 style={{ textAlign: 'center' }}>Send us an email</h3>
+      <h3 style={{ textAlign: 'center' }}>Send us an email, we will get back to you!</h3>
       {sent
       ? <div>
           <h2>Thank you, your email has been sent.</h2>
@@ -84,8 +84,8 @@ export default function ContactPage() {
             <Form.Control as='textarea' value={textBody} onChange={e => setTextBody(e.target.value)} required rows={7} />
           </Form.Group>
           <Form.Group>
-            <label>Your contact information:</label>
-            <Form.Control as='textarea' value={contactInfo} onChange={e => setContactInfo(e.target.value)} required />
+            <label>Your name and contact information:</label>
+            <Form.Control as='textarea' value={contactInfo} onChange={e => setContactInfo(e.target.value)} required rows={4} />
           </Form.Group>
           <div className="flex-center">
             {sending

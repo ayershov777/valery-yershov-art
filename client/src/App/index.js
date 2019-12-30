@@ -96,7 +96,7 @@ function App() {
         zIndex: -1000,
         minHeight: '100vh',
         width: '100%',
-        ...( backgroundLoading ? {} : { backgroundImage: 'url(https://valery-yershov-art.s3.amazonaws.com/background.jpg)' })
+        // ...( backgroundLoading ? {} : { backgroundImage: 'url(https://valery-yershov-art.s3.amazonaws.com/background.jpg)' })
       }}
     >
       <Router>

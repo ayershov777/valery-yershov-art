@@ -2,21 +2,28 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import ImageComponent from '../../ImageComponent';
+import SmoothImage from '../../SmoothImage';
 
 import './CoverComponent.css';
 
 export default function CoverComponent({ collection, title, idx }) {
-  const [imageHeight, setImageHeight] = useState(0);
   const screenSmall = window.matchMedia('(max-width: 640px)').matches;
 
-  console.log(collection.works);
-
   const CoverImage = () => (
-    <Link to={`/collections/${title}`} className="CollectionLink" style={{ height: imageHeight }}>
-      <ImageComponent
+    <Link to={`/collections/${title}`} className="CollectionLink">
+      <SmoothImage
         photo={collection.works[collection.coverIndex].photo}
-        style={{ width: '40vw' }}
-        setImageHeight={setImageHeight}
+        style={{
+          width: '40vw',
+          height: 
+            (() => {
+              let photo = collection.works[collection.coverIndex].photo;
+              let width = window.innerWidth * 0.4;
+              let scale = width / photo.pxWidth;
+              let height = photo.pxHeight * scale;
+              return height;
+            })()
+        }}
       />
     </Link>
   );
@@ -32,22 +39,52 @@ export default function CoverComponent({ collection, title, idx }) {
 
   return (
     screenSmall
-    ? <div className="CoverComponent-Mobile" style={{ height: `calc(${imageHeight}px + 2vw)` }}>
+    ? <div className="CoverComponent-Mobile"
+        style={{
+          position: 'relative',
+          height: 
+            (() => {
+              let photo = collection.works[collection.coverIndex].photo;
+              let width = window.innerWidth * 0.92;
+              let scale = width / photo.pxWidth;
+              let height = photo.pxHeight * scale;
+              return `calc(${height}px + 2vw)`;
+            })(),
+          overflow: 'hidden'
+        }}
+      >
         <Link to={`/collections/${title}`}>
-          <ImageComponent
+          <SmoothImage
             photo={collection.works[collection.coverIndex].photo}
-            style={{ position: 'relative', width: '92vw' }}
-            setImageHeight={setImageHeight}
+            style={{
+              width: '92vw',
+              height: 
+                (() => {
+                  let photo = collection.works[collection.coverIndex].photo;
+                  let width = window.innerWidth * 0.92;
+                  let scale = width / photo.pxWidth;
+                  let height = photo.pxHeight * scale;
+                  return height;
+                })()
+            }}
           />
           <h3
             style={{
+              display: 'block',
               position: 'relative',
-              top: `calc(${-imageHeight/2}px - 1.25em)`,
+              top: 
+                (() => {
+                  let photo = collection.works[collection.coverIndex].photo;
+                  let width = window.innerWidth * 0.92;
+                  let scale = width / photo.pxWidth;
+                  let height = photo.pxHeight * scale;
+                  return `calc(-${height}px/2 - 2em)`;
+                })(),
+              lineHeight: '4em',
               textAlign: 'center',
-              backgroundColor: 'rgba(32, 32, 32, 0.6)',
-              color: 'white',
+              backgroundColor: 'rgba(255, 255, 255, 0.45)',
+              color: 'black',
               textShadow: '0 0 5px white',
-              lineHeight: '2.5em',
               textTransform: 'capitalize' }}
           >
             {title}

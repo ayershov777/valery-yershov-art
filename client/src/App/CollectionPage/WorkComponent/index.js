@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+
 import Button from 'react-bootstrap/Button';
 
 import ImageComponent from '../../ImageComponent';
@@ -7,7 +9,9 @@ import './WorkComponent.css';
 
 export default function WorkComponent({ handleShow, work, isEven }) {
   const [imageHeight, setImageHeight] = useState(0);
-  const screenSmall = window.matchMedia('(max-width: 640px)').matches;
+  const screenSmall = window.matchMedia('(max-width: 768px)').matches;
+
+  const history = useHistory();
 
   const WorkImage = (
     <div
@@ -23,7 +27,7 @@ export default function WorkComponent({ handleShow, work, isEven }) {
         } // Maybe other prefixed APIs?
       }}
     >
-      <ImageComponent photo={work.photo} style={{ width: '40vw' }} setImageHeight={setImageHeight} />
+      <ImageComponent photo={work.photo} style={{ width: '50vw' }} setImageHeight={setImageHeight} />
     </div>
   );
 
@@ -32,14 +36,23 @@ export default function WorkComponent({ handleShow, work, isEven }) {
       <div>
         <div>
           <h3>{work.title}</h3>
-          {work.videoUrl &&
-            <Button onClick={() => handleShow(work)} variant="info" style={{ textShadow: '2px 2px 5px black' }}>Watch 3D video</Button>}
         </div>
-        <div style={{ paddingLeft: '32px', paddingTop: '16px' }}>
+        <br />
+        <div style={{ paddingLeft: '24px' }}>
           <p>Size: {work.sizeLabel}</p>
           <p>Medium: {work.mediumLabel}</p>
           <p>Year: {work.yearLabel}</p>
         </div>
+        {work.videoUrl &&
+          <>
+            <br />
+            <Button onClick={() => handleShow(work)} variant="dark" style={{ textShadow: '2px 2px 5px black' }}>Watch 3D video</Button>
+          </>}
+      </div>
+      <div style={{ paddingTop: '5vw', display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
+        <Button onClick={() => history.goBack()} variant="outline-dark" style={{ display:'inline-block', width: '40%', padding: '1px', margin: '2px' }} >back</Button>
+        <Button onClick={() => window.scrollTo(0, 0)} variant="outline-dark" style={{ display:'inline-block', width: '40%', padding: '1px', margin: '2px' }} >top</Button>
+        <Button onClick={() => history.push('/collections')} variant="outline-dark" style={{ display:'inline-block', width: '40%', padding: '1px', margin: '2px' }} >collections</Button>
       </div>
     </div>
   );

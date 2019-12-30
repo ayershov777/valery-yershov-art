@@ -35,8 +35,8 @@ export default function SmoothImage({ photo, style }) {
   
   return (
     <div style={{
+      // backgroundColor: 'gray',
       ...(style ? style : {}),
-      backgroundColor: 'gray',
     }}>
       {loadSrc && <img
         src={loadSrc}

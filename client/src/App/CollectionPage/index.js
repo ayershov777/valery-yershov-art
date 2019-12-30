@@ -25,9 +25,6 @@ export default function CollectionPage({ collections }) {
       {collection.works.map((work, idx) =>
         <WorkComponent key={collection.works[idx].title} handleShow={handleShow} work={collection.works[idx]} isEven={idx%2 === 0}/>
       )}
-      <div className="flex-center">
-        <Button as={Link} to="/collections" variant="outline-light" size="lg">Back to all collections</Button>
-      </div>
     </div>
   );
 }
