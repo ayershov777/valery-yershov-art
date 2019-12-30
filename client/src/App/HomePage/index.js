@@ -11,6 +11,7 @@ import Button from 'react-bootstrap/Button';
 import './HomePage.css';
 
 function HomePage({ data }) {
+  const screenTablet = window.matchMedia("(min-width: 760px) and (max-width: 1024px)");
   const screenMedium = window.matchMedia("(min-width: 1024px)").matches;
   const screenLarge = window.matchMedia("(min-width: 1367px)").matches;
 
@@ -108,7 +109,7 @@ function HomePage({ data }) {
           </div>
         </div>
 
-        <QuotesComponent quotes={quotes} authors={authors} />
+        {screenMedium ? <QuotesComponent quotes={quotes} authors={authors} /> : <><br /><br /></>}
         <LogosComponent logos={logos} />
 
         {/* StudioComponent */}
@@ -129,9 +130,9 @@ function HomePage({ data }) {
         >
           <h3 
             style={{
-              backgroundColor: !screenLarge && 'rgba(255, 255, 255, 0.7)',
+              backgroundColor: !screenLarge && 'rgba(255, 255, 255, 0.3)',
               color: !screenLarge && 'black',
-              textShadow: `0px 0px 3px #323232`,
+              textShadow: `0px 0px 3px ${screenLarge ? '#323232' : 'white'}`,
               textAlign: 'center',
               padding: '2vw'
             }}
@@ -146,11 +147,10 @@ function HomePage({ data }) {
             <Button 
               variant="dark"
               style={{
-                fontSize: screenLarge ? '2vw' : screenMedium ? '3vw' : '5vw',
+                fontSize: screenLarge ? '2vw' : '5vw',
                 textAlign: 'center',
                 textShadow: '0 0 1px black',
-                minWidth: '256px',
-                padding: screenMedium && !screenLarge && '15px' }}
+                minWidth: '256px' }}
               as={Link}
               to="/contact"
             > Visit the Studio </Button>
