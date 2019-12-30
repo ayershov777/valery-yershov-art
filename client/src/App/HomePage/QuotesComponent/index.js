@@ -30,9 +30,9 @@ export default function QuotesComponent({ quotes, authors }) {
             key={idx}
             style={{
               padding: '3vh',
-              marginBottom: '10vw',
+              marginBottom: '6vw',
               backgroundColor: 'rgba(255, 255, 255, 0.3)',
-              border: '1px dotted brown',
+              border: '1px dotted gray',
             }}
           >
             <p

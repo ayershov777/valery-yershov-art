@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import './SmoothImage.css';
+
 export default function SmoothImage({ photo, style }) {
   const [blurLoaded, setBlurLoaded] = useState(false);
   const [mainLoaded, setMainLoaded] = useState(false);
@@ -10,11 +12,10 @@ export default function SmoothImage({ photo, style }) {
     var showSrc = photo.highUrl;
   } else if(mainLoaded) {
     showSrc = photo.mainUrl;
-    if(photo.highUrl){
+    if(photo.highUrl)
       loadSrc = photo.highUrl;
-    } else {
+    else
       loadSrc = null;
-    }
   } else if(blurLoaded) {
     loadSrc = photo.mainUrl;
     showSrc = photo.blurUrl;
@@ -35,7 +36,7 @@ export default function SmoothImage({ photo, style }) {
   return (
     <div style={{
       ...(style ? style : {}),
-      backgroundColor: 'gray'
+      backgroundColor: 'gray',
     }}>
       {loadSrc && <img
         src={loadSrc}
@@ -47,7 +48,6 @@ export default function SmoothImage({ photo, style }) {
         src={showSrc}
         alt={photo.alt}
         style={{
-          backgroundSize: 'contain',
           width: '100%',
           height: '100%' }}
       />}

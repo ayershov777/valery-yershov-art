@@ -1,7 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-
-import useWindowSize from '../../hooks/windowSize';
 
 import SmoothImage from '../SmoothImage';
 // import ImageComponent from '../ImageComponent';
@@ -10,7 +8,7 @@ import QuotesComponent from './QuotesComponent';
 
 import Button from 'react-bootstrap/Button';
 
-import './HomePage.css'
+import './HomePage.css';
 
 function HomePage({ data }) {
   const screenMedium = window.matchMedia("(min-width: 1024px)").matches;
@@ -18,7 +16,6 @@ function HomePage({ data }) {
 
   const history = useHistory();
 
-  
   const logos = [
     data.photos.sothebys_logo,
     data.photos.phillips_house_logo,
@@ -47,8 +44,35 @@ function HomePage({ data }) {
   ];
 
   const authors = [ 'Natalia Kolodzei', 'Darren Jones', 'Herman Hesse' ];
+
+
+
+  //hooks
+  const [backLoaded, setBackLoaded] = useState(false);
+
+
   return (
     <div className="HomePage">
+      {!backLoaded && screenLarge && <img
+        src="https://valery-yershov-art.s3.amazonaws.com/front.jpg"
+        style={{ display: 'none' }}
+        onLoad={() => setBackLoaded(true)}
+      />}
+      {backLoaded && <div
+        style={{
+          position: 'absolute',
+          zIndex: '-1000',
+          width: '100vw',
+          height: '100%',
+          backgroundImage: `url(https://valery-yershov-art.s3.amazonaws.com/front.jpg)`,
+          backgroundAttachment: 'fixed',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover',
+          minHeight: 'calc(100vh - 62px)',
+          animation: backLoaded && 'fadeIn linear 1.5s'
+        }}
+      />}
       <div
         style={{
           backgroundColor: ( screenLarge ? 'rgba(255, 255, 255, 0.5)' : 'none' )
@@ -61,7 +85,7 @@ function HomePage({ data }) {
             className="clickable"
             onClick={() => history.push('/collections')}
             style={{ 
-              border: '4px solid gray',
+              border: '1px solid gray',
               borderRadius: '50%',
               overflow: 'hidden',
               marginTop: '2vh'
@@ -88,7 +112,7 @@ function HomePage({ data }) {
         <LogosComponent logos={logos} />
 
         {/* StudioComponent */}
-        <div
+        {!screenLarge && <div
           style={{
             backgroundImage: !screenLarge && `url(${data.photos.front.mainUrl})`,
             backgroundSize: 'cover',
@@ -100,7 +124,7 @@ function HomePage({ data }) {
                 let height = photo.pxHeight * scale;
                 return height;
               })(),
-            paddingTop: '10vh'
+            paddingTop: '7vh'
           }}
         >
           <h3 
@@ -109,7 +133,7 @@ function HomePage({ data }) {
               color: !screenLarge && 'black',
               textShadow: `0px 0px 3px ${screenLarge? '#323232' : 'white'}`,
               textAlign: 'center',
-              paddingTop: '1vw'
+              padding: '2vw'
             }}
           >
             Valery works in his beautiful studio in Hell's Kitchen, New York City. We invite you to come and visit us!
@@ -122,12 +146,11 @@ function HomePage({ data }) {
           >
             <Button 
               variant="dark"
-              // size={screenLarge ? 'sm': 'lg'}
               style={{
                 fontSize: screenLarge? '2vw' : '5vw',
                 textAlign: 'center',
                 textShadow: '0 0 1px black',
-                minWidth: '256px'
+                minWidth: '256px',
               }}
               as={Link}
               to="/contact"
@@ -135,11 +158,10 @@ function HomePage({ data }) {
               Visit the Studio
             </Button>
           </div>
-        </div>
-
+        </div>}
       </div>
 
-      {/* FrontComponent */}
+      {/* FrostComponent */}
       {screenLarge &&
         <div
           style={{

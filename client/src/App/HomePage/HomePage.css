@@ -1,11 +1,11 @@
 .App-Desktop .HomePage{
-  background-image: url(https://valery-yershov-art.s3.amazonaws.com/front.jpg);
-  background-attachment: fixed;
+  /* background-image: url(https://valery-yershov-art.s3.amazonaws.com/front.jpg); */
+  /* background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: cover; */
   /* padding-bottom: 100vh; */
-  min-height: calc(100vh - 62px)
+  min-height: calc(100vh - 62px);
 }
 
 .HomePage .front-image:hover {
@@ -14,4 +14,9 @@
 
 .clickable:hover {
   cursor: pointer;
+}
+
+@keyframes fadeIn {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
 }

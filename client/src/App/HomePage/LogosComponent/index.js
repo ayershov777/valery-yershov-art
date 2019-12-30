@@ -6,7 +6,7 @@ export default function LogosComponent({ logos }) {
   return (
     <div 
       style={{
-        marginTop: '-10vw',
+        marginTop: '-6vw',
         display: 'flex',
         flexWrap: 'wrap',
         justifyContent: 'space-evenly',
