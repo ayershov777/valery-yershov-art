@@ -45,7 +45,8 @@ export default function CoverComponent({ collection, title, idx }) {
               top: `calc(${-imageHeight/2}px - 1.25em)`,
               textAlign: 'center',
               backgroundColor: 'rgba(32, 32, 32, 0.6)',
-              color: 'black',
+              color: 'white',
+              textShadow: '0 0 5px white',
               lineHeight: '2.5em',
               textTransform: 'capitalize' }}
           >
