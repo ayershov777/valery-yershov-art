@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+
+import Button from 'react-bootstrap/Button';
 
 import ImageComponent from '../../ImageComponent';
 import SmoothImage from '../../SmoothImage';
@@ -8,6 +10,8 @@ import './CoverComponent.css';
 
 export default function CoverComponent({ collection, title, idx }) {
   const screenSmall = window.matchMedia('(max-width: 640px)').matches;
+
+  const history = useHistory();
 
   const CoverImage = () => (
     <Link to={`/collections/${title}`} className="CollectionLink">
@@ -34,6 +38,10 @@ export default function CoverComponent({ collection, title, idx }) {
         <h3 className='title'>“{title}”</h3>
       </Link>
       <p>{collection.description}</p>
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <Button onClick={() => history.push(`/collections/${title}`)} style={{ margin: '4px' }} size="sm" variant="outline-dark">view collection</Button>
+        <Button onClick={() => history.goBack()} style={{ margin: '4px' }} size="sm" variant="outline-dark">back</Button>
+      </div>
     </div>
   );
 
