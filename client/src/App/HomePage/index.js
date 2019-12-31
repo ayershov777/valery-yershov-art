@@ -118,6 +118,19 @@ function HomePage({ data }) {
         {screenMedium ? <QuotesComponent quotes={quotes} authors={authors} /> : <><br /><br /></>}
         <LogosComponent logos={logos} />
 
+        <h3 
+            style={{
+              backgroundColor: !screenLarge && 'white',
+              color: !screenLarge && 'black',
+              fontWeight: 600,
+              textShadow: screenLarge && `0px 0px 10px #323232`,
+              textAlign: 'center',
+              padding: '2vw'
+            }}
+          >
+            Valery works in his beautiful studio in Hell's Kitchen, NYC. We invite you to come and visit us!
+          </h3>
+
         {/* StudioComponent */}
         <div
           style={!screenLarge ? {
@@ -137,22 +150,22 @@ function HomePage({ data }) {
             justifyContent: 'space-between'
           }: {}}
         >
-          <h3 
+          {/* <h3 
             style={{
-              background: !screenLarge && 'linear-gradient(white, rgba(255, 255, 255, 0))',
+              background: !screenLarge && 'linear-gradient(white, rgba(255, 255, 255, 0.3))',
               color: !screenLarge && 'black',
-              // fontWeight: 600,
+              fontWeight: 500,
               textShadow: `0px 0px 10px ${screenLarge ? '#323232' : 'white'}`,
               textAlign: 'center',
               padding: '2vw'
             }}
           >
             Valery works in his beautiful studio in Hell's Kitchen, NYC. We invite you to come and visit us!
-          </h3>
-
+          </h3> */}
+          <div></div>
           <div
             style={{
-              display: 'flex', justifyContent: 'center' }}
+              display: 'flex', flexDirection: 'column', alignItems: 'center' }}
             >
             <Button 
               variant="dark"
@@ -160,7 +173,8 @@ function HomePage({ data }) {
                 fontSize: screenLarge ? '2vw' : '5vw',
                 textAlign: 'center',
                 textShadow: '0 0 1px black',
-                marginBottom: '1.5vw'}}
+                marginTop: '4px',
+                width: !screenLarge && '100vw' }}
               as={Link}
               to="/contact"
             > Visit the Studio </Button>
