@@ -38,7 +38,7 @@ export default function CoverComponent({ collection, title, idx }) {
         <h3 className='title'>“{title}”</h3>
       </Link>
       <p>{collection.description}</p>
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
+      <div style={{ display: 'flex' }}>
         <Button onClick={() => history.push(`/collections/${title}`)} style={{ margin: '4px' }} size="sm" variant="outline-dark">view collection</Button>
         <Button onClick={() => history.goBack()} style={{ margin: '4px' }} size="sm" variant="outline-dark">back</Button>
       </div>

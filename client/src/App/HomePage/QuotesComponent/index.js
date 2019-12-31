@@ -29,6 +29,8 @@ export default function QuotesComponent({ quotes, authors }) {
           <div
             key={idx}
             style={{
+              margin: 'auto',
+              width: '60vw',
               padding: '3vh',
               marginBottom: '6vw',
               backgroundColor: 'rgba(255, 255, 255, 0.3)',

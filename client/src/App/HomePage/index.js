@@ -46,11 +46,8 @@ function HomePage({ data }) {
 
   const authors = [ 'Natalia Kolodzei', 'Darren Jones', 'Herman Hesse' ];
 
-
-
   //hooks
   const [backLoaded, setBackLoaded] = useState(false);
-
 
   return (
     <div className="HomePage">
@@ -84,7 +81,7 @@ function HomePage({ data }) {
         <div className="flex-center">
           <div
             className="clickable"
-            onClick={() => history.push('/collections')}
+            onClick={() => history.push('/collections/featured')}
             style={{ 
               border: '1px solid gray',
               borderRadius: '50%',

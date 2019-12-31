@@ -52,6 +52,20 @@ function App() {
      .then(json => {
        //reorder works
 
+      const priorOrder = [
+        json.collections[0].works[8], // sugar and spice
+        json.collections[0].works[10], // dolls and crocodiles
+        json.collections[0].works[7], // two men with birds
+        json.collections[0].works[9], // silk paradise
+        json.collections[0].works[1], // desperation (rename to silent)
+        json.collections[0].works[0], // humiliation (rename to quiet)
+        json.collections[0].works[2], // devastation (rename to void)
+        json.collections[0].works[3], // new sensation
+        json.collections[0].works[4], // relcalcitrant
+        json.collections[0].works[5], // revolutionaries
+        json.collections[0].works[6], // the great depression
+      ];
+
       const elementsOrder = [
         json.collections[1].works[0], // ocean master
         json.collections[1].works[4], // feeling threatened
@@ -66,7 +80,7 @@ function App() {
         json.collections[1].works[8] // elements 6
       ];
 
-      const undergroundOrder  = [
+      const undergroundOrder = [
         json.collections[2].works[0], // rhino territory
         json.collections[2].works[4], // megalodon in the bronx
         json.collections[2].works[2], // mans last friend
@@ -98,6 +112,7 @@ function App() {
         ]
       }
 
+      json.collections[0].works = priorOrder;
       json.collections[1].works = elementsOrder;
       json.collections[2].works = undergroundOrder;
       
