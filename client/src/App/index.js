@@ -80,13 +80,13 @@ function App() {
         coverIndex: 0,
         title: 'featured',
         works: [
-          json.collections[2].works[0], // rhino territory
           json.collections[1].works[0], // ocean master
-          json.collections[2].works[4], // megalodon in the bronx
-          json.collections[1].works[1], // elephant bath
           json.collections[1].works[4], // feeling threatened
-          json.collections[1].works[3], // the opportunist
           json.collections[1].works[10], // hippocampus cuda
+          json.collections[1].works[1], // elephant bath
+          json.collections[1].works[3], // the opportunist
+          json.collections[2].works[0], // rhino territory
+          json.collections[2].works[4], // megalodon in the bronx
           json.collections[2].works[2], // mans last friend
           json.collections[2].works[3], // graffiti backed alpha
           json.collections[1].works[2], // elements 1
