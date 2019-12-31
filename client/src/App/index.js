@@ -27,7 +27,6 @@ function App() {
 
   const [pageData, setPageData] = useState(null);
   const [collections, setCollections] = useState(null);
-  const [exhibitions, setExhibitions] = useState(null);
 
   useEffect(() => {
     async function fetchData(url) {
@@ -72,6 +71,7 @@ function App() {
         json.collections[1].works[10], // hippocampus cuda
         json.collections[1].works[1], // elephant bath
         json.collections[1].works[3], // the opportunist
+        json.collections[1].works[11], // marine invader
         json.collections[1].works[2], // elements 1
         json.collections[1].works[5], // elements 2
         json.collections[1].works[9], // elements 3
@@ -99,6 +99,7 @@ function App() {
           json.collections[1].works[10], // hippocampus cuda
           json.collections[1].works[1], // elephant bath
           json.collections[1].works[3], // the opportunist
+          json.collections[1].works[11], // marine invader
           json.collections[2].works[0], // rhino territory
           json.collections[2].works[4], // megalodon in the bronx
           json.collections[2].works[2], // mans last friend

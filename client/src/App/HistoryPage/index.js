@@ -23,15 +23,15 @@ export default function HistoryPage({ data }) {
           flexWrap: 'wrap' }}
       >
         <div style={{ display: 'inline-block' }}>
-          <a href={biographyPDF}>
+          <a href={biographyPDF} style={{ color: "white" }}>
             <h4 style={{ textAlign: 'center' }}>Valery's Amazing Story</h4>
-            <ImageComponent photo={data.photos.bio_preview} style={{ width: '256px', border: '1px dashed blue'}} />
+            <ImageComponent photo={data.photos.bio_preview} style={{ width: '256px', border: '1px dashed darkslategray' }} />
           </a>
         </div>
         <div style={{ display: 'inline-block' }}>
-          <a href={exhibitionHistoryPDF}>
+          <a href={exhibitionHistoryPDF} style={{ color: "white" }}>
             <h4 style={{ textAlign: 'center' }}>Exhibition History</h4>
-            <ImageComponent photo={data.photos.exhibitions_preview} style={{ width: '256px', border: '1px dashed blue'}} />
+            <ImageComponent photo={data.photos.exhibitions_preview} style={{ width: '256px', border: '1px dashed darkslategray' }} />
           </a>
         </div>
       </div>

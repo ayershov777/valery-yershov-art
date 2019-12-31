@@ -18,6 +18,7 @@ function HomePage({ data }) {
   const history = useHistory();
 
   const logos = [
+    data.photos.artsy_logo,
     data.photos.sothebys_logo,
     data.photos.phillips_house_logo,
     data.photos.palm_beach_logo,
@@ -136,8 +137,8 @@ function HomePage({ data }) {
             style={{
               backgroundColor: !screenLarge && 'rgba(255, 255, 255, 0.3)',
               color: !screenLarge && 'black',
-              fontWeight: 600,
-              // textShadow: `0px 0px 3px ${screenLarge ? '#323232' : 'white'}`,
+              // fontWeight: 600,
+              textShadow: `0px 0px 3px ${screenLarge ? '#323232' : 'white'}`,
               textAlign: 'center',
               padding: '2vw'
             }}
