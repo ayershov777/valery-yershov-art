@@ -122,7 +122,7 @@ function HomePage({ data }) {
             style={{
               backgroundColor: !screenLarge && 'white',
               color: !screenLarge && 'black',
-              fontWeight: 600,
+              fontWeight: 500,
               textShadow: screenLarge && `0px 0px 10px #323232`,
               textAlign: 'center',
               padding: '2vw'
@@ -162,8 +162,8 @@ function HomePage({ data }) {
           >
             Valery works in his beautiful studio in Hell's Kitchen, NYC. We invite you to come and visit us!
           </h3> */}
-          <div></div>
-          <div
+          {/* <div></div> */}
+          {/* <div
             style={{
               display: 'flex', flexDirection: 'column', alignItems: 'center' }}
             >
@@ -178,9 +178,24 @@ function HomePage({ data }) {
               as={Link}
               to="/contact"
             > Visit the Studio </Button>
-          </div>
+          </div> */}
         </div>
-
+        <div
+            style={{
+              display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+            >
+            <Button 
+              variant="dark"
+              style={{
+                fontSize: screenLarge ? '2vw' : '5vw',
+                textAlign: 'center',
+                textShadow: '0 0 1px black',
+                margin: '4px 4px',
+                width: !screenLarge && 'calc(100vw - 8px)' }}
+              as={Link}
+              to="/contact"
+            > Visit the Studio </Button>
+          </div>
 
       </div>
 
