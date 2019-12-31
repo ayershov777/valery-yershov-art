@@ -22,7 +22,7 @@ export default function CollectionPage({ collections }) {
   return (
     <div className="CollectionPage">
       <VideoModal show={show} handleClose={handleClose} />
-      <h3 style={{ fontSize: isSmall ? '30pt' : '34pt' }}>{title} {(title === 'prior' || title === 'featured') ? 'works' : 'collection'}</h3>
+      <h3 style={{ padding: '0 2vw', fontSize: isSmall ? '30pt' : '34pt' }}>{title} {(title === 'prior' || title === 'featured') ? 'works' : 'collection'}</h3>
       {collection.works.map((work, idx) =>
         <WorkComponent key={collection.works[idx].title} handleShow={handleShow} work={collection.works[idx]} isEven={idx%2 === 0}/>
       )}

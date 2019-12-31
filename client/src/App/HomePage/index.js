@@ -139,7 +139,8 @@ function HomePage({ data }) {
             style={{
               backgroundColor: !screenLarge && 'rgba(255, 255, 255, 0.3)',
               color: !screenLarge && 'black',
-              textShadow: `0px 0px 3px ${screenLarge ? '#323232' : 'white'}`,
+              fontWeight: 600,
+              // textShadow: `0px 0px 3px ${screenLarge ? '#323232' : 'white'}`,
               textAlign: 'center',
               padding: '2vw'
             }}
