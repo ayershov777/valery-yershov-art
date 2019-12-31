@@ -12,6 +12,7 @@ import './HomePage.css';
 
 function HomePage({ data }) {
   const screenTablet = window.matchMedia("(min-width: 760px) and (max-width: 1024px)");
+  const screenSmall = window.matchMedia("(max-width: 640px)").matches;
   const screenMedium = window.matchMedia("(min-width: 1024px)").matches;
   const screenLarge = window.matchMedia("(min-width: 1367px)").matches;
 
@@ -109,9 +110,9 @@ function HomePage({ data }) {
 
         {/* art fair component */}
         <div className="flex-center" style={{ marginTop: '3vw', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
-          <h3 style={{ color: 'black', maxWidth: '75vw', fontWeight: 700}}>Valery will be presenting his works at Palm Beach Modern + Contemporary, January 9 - 12</h3>
+          <h3 style={{ color: 'black', maxWidth: '75vw', fontWeight: 700, fontSize: '1.4em'}}>Valery will be presenting his works at Palm Beach Modern + Contemporary, January 9 - 12</h3>
           <Button style={{ margin: '3vh' }} as={Link} to="/collections/featured" variant="dark">See featured works</Button>
-          <SmoothImage photo={data.photos.palm_beach} style={{ backgroundColor: 'white', border: '1px solid gray', marginTop: '1vw', padding: '0 2vw 2vw 2vw', width: '60vw' }} />
+          <SmoothImage photo={data.photos.palm_beach} style={{ backgroundColor: 'white', border: '1px solid gray', marginTop: '1vw', padding: '0 2vw 2vw 2vw', width: screenSmall ? '85vw' : '60vw' }} />
         </div>
 
         {screenMedium ? <QuotesComponent quotes={quotes} authors={authors} /> : <><br /><br /></>}
@@ -130,20 +131,20 @@ function HomePage({ data }) {
                 let height = photo.pxHeight * scale;
                 return height;
               })(),
-            paddingTop: '7vh'
+            // paddingTop: '7vh'
           }: {}}
         >
           <h3 
             style={{
-              backgroundColor: !screenLarge && 'rgba(255, 255, 255, 0.3)',
+              background: !screenLarge && 'linear-gradient(white, rgba(255, 255, 255, 0) 50%)',
               color: !screenLarge && 'black',
               // fontWeight: 600,
-              textShadow: `0px 0px 3px ${screenLarge ? '#323232' : 'white'}`,
+              textShadow: `0px 0px 10px ${screenLarge ? '#323232' : 'white'}`,
               textAlign: 'center',
               padding: '2vw'
             }}
           >
-            Valery works in his beautiful studio in Hell's Kitchen, New York City. We invite you to come and visit us!
+            Valery works in his beautiful studio in Hell's Kitchen, NYC. We invite you to come and visit us!
           </h3>
 
           <div
@@ -156,7 +157,7 @@ function HomePage({ data }) {
                 fontSize: screenLarge ? '2vw' : '5vw',
                 textAlign: 'center',
                 textShadow: '0 0 1px black',
-                minWidth: '256px' }}
+                 }}
               as={Link}
               to="/contact"
             > Visit the Studio </Button>
