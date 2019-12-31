@@ -111,8 +111,8 @@ function HomePage({ data }) {
 
         {/* art fair component */}
         <div className="flex-center" style={{ marginTop: '3vw', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
-          <h3 style={{ color: 'black '}}>Valery will be presenting his works at Palm Beach Modern + Contemporary, on January 9th</h3>
-          <Button as={Link} to="/collections/featured" variant="outline-dark">See featured works</Button>
+          <h3 style={{ color: 'black', maxWidth: '75vw', fontWeight: 700}}>Valery will be presenting his works at Palm Beach Modern + Contemporary, January 9 - 12</h3>
+          <Button style={{ margin: '3vh' }} as={Link} to="/collections/featured" variant="dark">See featured works</Button>
           <SmoothImage photo={data.photos.palm_beach} style={{ backgroundColor: 'white', border: '1px solid gray', marginTop: '1vw', padding: '0 2vw 2vw 2vw', width: '60vw' }} />
         </div>
 

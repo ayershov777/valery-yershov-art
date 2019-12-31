@@ -171,7 +171,7 @@ function App() {
           </Route>
 
           <Route exact path="/history">
-            {pageData && exhibitions && <HistoryPage data={pageData.history} exhibitions={exhibitions} />}
+            {pageData && <HistoryPage data={pageData.history} />}
           </Route>
 
           {/* <Route exact path="/prior_works">

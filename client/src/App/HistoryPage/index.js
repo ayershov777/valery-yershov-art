@@ -8,7 +8,8 @@ import ImageComponent from '../ImageComponent';
 
 export default function HistoryPage({ data }) {
   return (
-    <div style={{  }}>
+    <div>
+      
       <BriefComponent photo={data.photos.artist_portrait} text={data.texts.short} />
 
       <div style={{ position: 'relative', top: '-18px',  height: '32px', marginBottom: '-18px', zIndex: '-1', backgroundColor: 'rgba(16, 16, 16, 0.9)' }} />
