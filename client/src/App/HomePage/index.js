@@ -28,8 +28,8 @@ function HomePage({ data }) {
     data.photos.saatchi_logo,
     data.photos.white_box_logo,
     data.photos.kolodzei_logo,
-    data.photos.neuberger_logo
-    // data.photos.national_arts_club_logo,
+    data.photos.neuberger_logo,
+    data.photos.national_arts_club_logo,
   ];
 
   const quotes = [
