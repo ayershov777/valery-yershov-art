@@ -11,15 +11,13 @@ import './CollectionPage.css';
 export default function CollectionPage({ collections }) {
   const isSmall = window.matchMedia('(max-width: 640px)').matches;
   let { title } = useParams();
-  console.log(title);
+
   let collection = collections[title];
 
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = (work) => setShow(work);
-
-  console.log(collection);
 
   return (
     <div className="CollectionPage">

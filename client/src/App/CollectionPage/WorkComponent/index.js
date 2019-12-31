@@ -6,6 +6,7 @@ import Button from 'react-bootstrap/Button';
 import ImageComponent from '../../ImageComponent';
 
 import './WorkComponent.css';
+import SmoothImage from '../../SmoothImage';
 
 export default function WorkComponent({ handleShow, work, isEven }) {
   const [imageHeight, setImageHeight] = useState(0);
@@ -62,18 +63,22 @@ export default function WorkComponent({ handleShow, work, isEven }) {
     ? <div className="WorkComponent" style={{ flexDirection: 'column' }}>
         <hr style={{ borderTop: '1px solid black', width: '100%', height: 0 }} />
         <h3 style={{ textAlign: 'center', color: 'black' }}>{work.title}</h3>
-        <ImageComponent photo={work.photo} style={{ width: '100%' }} />
-        {work.videoUrl && <Button variant="dark" onClick={() => handleShow(work)} style={{ marginTop: '4px', width: '100%', textShadow: '2px 2px 5px black' }}>Watch 3D video</Button>}
-        <div style={{ paddingTop: '16px', color: 'black' }}>
-          <p>Medium: {work.mediumLabel}</p>
-          <p>Year: {work.yearLabel}</p>
-          <p>Size: {work.sizeLabel}</p>
+        <SmoothImage photo={work.photo} />
+        
+        <div style={{ padding: '2vw 5vw 0 5vw' }}>
+          {work.videoUrl && <Button variant="dark" onClick={() => handleShow(work)} style={{ marginTop: '4px', width: '100%', textShadow: '2px 2px 5px black' }}>Watch 3D video</Button>}
+          <div style={{ paddingTop: '16px', color: 'black' }}>
+            <p>Medium: {work.mediumLabel}</p>
+            <p>Year: {work.yearLabel}</p>
+            <p>Size: {work.sizeLabel}</p>
+          </div>
+          <div style={{ paddingTop: '3vw', display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
+            <Button onClick={() => history.goBack()} variant="outline-dark" style={{ display:'inline-block', width: '40%', padding: '1px', margin: '2px' }} >back</Button>
+            <Button onClick={() => window.scrollTo(0, 0)} variant="outline-dark" style={{ display:'inline-block', width: '40%', padding: '1px', margin: '2px' }} >top</Button>
+            <Button onClick={() => history.push('/collections')} variant="outline-dark" style={{ display:'inline-block', width: '40%', padding: '1px', margin: '2px' }} >collections</Button>
+          </div>
         </div>
-        <div style={{ paddingTop: '3vw', display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
-          <Button onClick={() => history.goBack()} variant="outline-dark" style={{ display:'inline-block', width: '40%', padding: '1px', margin: '2px' }} >back</Button>
-          <Button onClick={() => window.scrollTo(0, 0)} variant="outline-dark" style={{ display:'inline-block', width: '40%', padding: '1px', margin: '2px' }} >top</Button>
-          <Button onClick={() => history.push('/collections')} variant="outline-dark" style={{ display:'inline-block', width: '40%', padding: '1px', margin: '2px' }} >collections</Button>
-        </div>
+
       </div>
     : <div className="WorkComponent">
         {isEven

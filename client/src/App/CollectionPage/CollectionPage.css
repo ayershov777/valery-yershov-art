@@ -1,8 +1,8 @@
 .CollectionPage {
   background-color: rgba(64, 64, 64, 0.5);
-  margin: 2vw 3vw;
+  /* margin: 2vw 3vw; */
   box-shadow: 0 0 10px black;
-  padding: 2vw 5vw 1vw 5vw;
+  padding-top: 2vh;
 }
 
 .CollectionPage > h3 {
