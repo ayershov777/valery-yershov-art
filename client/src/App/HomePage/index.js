@@ -132,11 +132,14 @@ function HomePage({ data }) {
                 return height;
               })(),
             // paddingTop: '7vh'
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between'
           }: {}}
         >
           <h3 
             style={{
-              background: !screenLarge && 'linear-gradient(white, rgba(255, 255, 255, 0) 50%)',
+              background: !screenLarge && 'linear-gradient(white, rgba(255, 255, 255, 0))',
               color: !screenLarge && 'black',
               // fontWeight: 600,
               textShadow: `0px 0px 10px ${screenLarge ? '#323232' : 'white'}`,
@@ -149,7 +152,7 @@ function HomePage({ data }) {
 
           <div
             style={{
-              display: 'flex', justifyContent: 'center', padding: '2vw 0 0 0' }}
+              display: 'flex', justifyContent: 'center' }}
             >
             <Button 
               variant="dark"
@@ -157,7 +160,7 @@ function HomePage({ data }) {
                 fontSize: screenLarge ? '2vw' : '5vw',
                 textAlign: 'center',
                 textShadow: '0 0 1px black',
-                 }}
+                marginBottom: '1.5vw'}}
               as={Link}
               to="/contact"
             > Visit the Studio </Button>
