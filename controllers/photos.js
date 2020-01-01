@@ -100,10 +100,11 @@ async function updatePhoto(req, res, next) {
      .lean();
     if(!photo) return res.status(404).send('photo id not found');
 
-    await s3Delete({ Key: photo.mainKey }); 
-    await s3Delete({ Key: photo.blurKey });
-
+    
     if(req.file) {
+      await s3Delete({ Key: photo.mainKey }); 
+      await s3Delete({ Key: photo.blurKey });
+      
       req.nextCb = () => { 
         res.status(204).send();
       }

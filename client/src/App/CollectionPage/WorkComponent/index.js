@@ -9,10 +9,18 @@ import './WorkComponent.css';
 import SmoothImage from '../../SmoothImage';
 
 export default function WorkComponent({ handleShow, work, isEven }) {
-  const [imageHeight, setImageHeight] = useState(0);
+  // const [imageHeight, setImageHeight] = useState(0);
   const screenMedium = window.matchMedia('(max-width: 1024px)').matches;
 
   const history = useHistory();
+
+  const imageHeight = (() => {
+    let photo = work.photo;
+    let width = window.innerWidth * 0.5;
+    let scale = width / photo.pxWidth;
+    let height = photo.pxHeight * scale;
+    return height;
+  })()
 
   const WorkImage = (
     <div
@@ -28,7 +36,8 @@ export default function WorkComponent({ handleShow, work, isEven }) {
         } // Maybe other prefixed APIs?
       }}
     >
-      <ImageComponent photo={work.photo} style={{ width: '50vw' }} setImageHeight={setImageHeight} />
+      {/* <ImageComponent photo={work.photo} style={{ width: '50vw' }} setImageHeight={setImageHeight} /> */}
+      <SmoothImage photo={work.photo} style={{ width: '50vw', height: imageHeight }} />
     </div>
   );
 
