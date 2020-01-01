@@ -20,22 +20,22 @@ function HomePage({ data }) {
 
   const logos = [
     data.photos.artsy_logo,
+    data.photos.art_miami_logo,
     data.photos.sothebys_logo,
     data.photos.phillips_house_logo,
     data.photos.palm_beach_logo,
     data.photos.art_new_york_logo,
     data.photos.armory_logo,
+    data.photos.national_arts_club_logo,
     data.photos.saatchi_logo,
     data.photos.white_box_logo,
     data.photos.kolodzei_logo,
     data.photos.neuberger_logo,
-    data.photos.national_arts_club_logo,
   ];
 
   const quotes = [
-    `Valery does not impose his own readings on his paintings; instead, he plays on the
-    ambivalence of meaning filled with ideological and cultural layers, encouraging discussion
-    of his work.`, /*By placing characters into this unreal space, Yershov highlights the
+    `Valery does not impose his own readings on his art; instead, he plays on the
+    ambivalence of meaning, encouraging discussion of his work.`, /*By placing characters into this unreal space, Yershov highlights the
     unique-subjective human essence, with meaning shifting just beneath the surface. Valery's
     paintings strike and amaze the viewer's imagination, appealing to the viewer on both
     analytical and emotional levels while illuminating many aspects of the human experience`,*/
